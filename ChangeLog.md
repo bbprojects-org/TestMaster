@@ -20,7 +20,7 @@
 
 - Amended to allow pre-version 3.xx (non protected) question sets to be read and run. No editing of these files is permitted
 
-### 26 July 2999	(v3.00)
+### 26 July 1999	(v3.00)
 
 - Corrected protection bug which prevented users adding questions
 - Changed user options to Administrator function
