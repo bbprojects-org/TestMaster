@@ -1,0 +1,121 @@
+object ExhibitManager: TExhibitManager
+  Left = 2907
+  Height = 400
+  Top = 629
+  Width = 600
+  BorderIcons = [biSystemMenu]
+  Caption = 'Select exhibit image'
+  ClientHeight = 400
+  ClientWidth = 600
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 600
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  OnShow = FormShow
+  LCLVersion = '2.0.1.0'
+  object btnSelect: TButton
+    Left = 522
+    Height = 20
+    Hint = 'Select this image (inserts image in the test module)'
+    Top = 367
+    Width = 60
+    Anchors = [akRight, akBottom]
+    Caption = 'Select'
+    Default = True
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object btnCancel: TButton
+    Left = 454
+    Height = 20
+    Hint = 'Close this window (no changes made)'
+    Top = 367
+    Width = 60
+    Anchors = [akRight, akBottom]
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object gbFileList: TGroupBox
+    Left = 8
+    Height = 352
+    Top = 8
+    Width = 216
+    Align = alClient
+    BorderSpacing.Bottom = 32
+    BorderSpacing.Around = 8
+    Caption = 'Image Files:'
+    ClientHeight = 329
+    ClientWidth = 208
+    TabOrder = 2
+    object FileListBox1: TFileListBox
+      Left = 4
+      Height = 321
+      Hint = 'Select the relevant file (image is previewed)'
+      Top = 4
+      Width = 200
+      Align = alClient
+      BorderSpacing.Around = 4
+      Directory = '/'
+      ItemHeight = 0
+      Mask = '*.bmp;*.jpg;*.jpeg;*.png'
+      OnClick = FileListBox1Click
+      OnDblClick = FileListBox1DblClick
+      TabOrder = 0
+    end
+  end
+  object gbImage: TGroupBox
+    Left = 232
+    Height = 352
+    Top = 8
+    Width = 360
+    Align = alRight
+    BorderSpacing.Bottom = 32
+    BorderSpacing.Around = 8
+    Caption = 'Image:'
+    ClientHeight = 329
+    ClientWidth = 352
+    TabOrder = 3
+    object Image1: TImage
+      Left = 4
+      Height = 321
+      Hint = 'Image preview window'
+      Top = 4
+      Width = 344
+      Align = alClient
+      BorderSpacing.Around = 4
+      Center = True
+      Stretch = True
+    end
+  end
+  object panelWarning: TPanel
+    Left = 256
+    Height = 122
+    Top = 128
+    Width = 312
+    BevelInner = bvLowered
+    ClientHeight = 122
+    ClientWidth = 312
+    Color = clYellow
+    ParentColor = False
+    TabOrder = 4
+    object lblWarning: TLabel
+      Left = 12
+      Height = 118
+      Top = 2
+      Width = 288
+      Align = alClient
+      Alignment = taCenter
+      BorderSpacing.Left = 10
+      BorderSpacing.Right = 10
+      Caption = 'WARNING !'
+      Layout = tlCenter
+      ParentColor = False
+      WordWrap = True
+    end
+  end
+end

@@ -1,0 +1,79 @@
+object TimerValue: TTimerValue
+  Left = 2651
+  Height = 100
+  Top = 280
+  Width = 296
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Countdown Time'
+  ClientHeight = 100
+  ClientWidth = 296
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '2.0.1.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 45
+    Top = 8
+    Width = 280
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    Caption = 'You have opted for a countdown timer as opposed to elapsed time. Please set the time limit required in minutes:'
+    ParentColor = False
+    WordWrap = True
+  end
+  object btnOk: TButton
+    Left = 216
+    Height = 20
+    Hint = 'Run test with time limit as set'
+    Top = 64
+    Width = 60
+    Caption = 'OK'
+    Default = True
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ModalResult = 1
+    ParentFont = False
+    TabOrder = 0
+  end
+  object btnCancel: TButton
+    Left = 152
+    Height = 20
+    Hint = 'Exit this dialog, do not run test'
+    Top = 64
+    Width = 60
+    Caption = 'Cancel'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ModalResult = 2
+    ParentFont = False
+    TabOrder = 1
+  end
+  object edTimeLimit: TSpinEdit
+    Left = 48
+    Height = 16
+    Top = 64
+    Width = 56
+    Increment = 5
+    MaxValue = 180
+    MinValue = 10
+    TabOrder = 2
+    Value = 60
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 15
+    Top = 65
+    Width = 29
+    Caption = 'Time:'
+    ParentColor = False
+  end
+end

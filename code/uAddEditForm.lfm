@@ -1,0 +1,693 @@
+object AddEditForm: TAddEditForm
+  Left = 2581
+  Height = 600
+  Top = 55
+  Width = 800
+  AllowDropFiles = True
+  Caption = 'TestMaster - Add / edit questions'
+  ClientHeight = 600
+  ClientWidth = 800
+  Constraints.MinHeight = 600
+  Constraints.MinWidth = 800
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnDropFiles = FormDropFiles
+  OnResize = FormResize
+  OnShow = FormShow
+  ParentFont = True
+  ShowHint = True
+  LCLVersion = '2.0.1.0'
+  object panelButtons: TPanel
+    Left = 680
+    Height = 600
+    Top = 0
+    Width = 120
+    Align = alRight
+    BevelOuter = bvNone
+    ClientHeight = 600
+    ClientWidth = 120
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ParentFont = False
+    TabOrder = 0
+    object rgAnswerType: TRadioGroup
+      Left = 8
+      Height = 60
+      Hint = 'Indicates whether there is one, or more than one, correct answer'
+      Top = 400
+      Width = 104
+      AutoFill = True
+      Caption = 'Answers:'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 37
+      ClientWidth = 96
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      ItemIndex = 0
+      Items.Strings = (
+        'Single'
+        'Multiple'
+      )
+      OnClick = rgAnswerTypeClick
+      ParentFont = False
+      TabOrder = 0
+    end
+    object cgProtectedSet: TCheckGroup
+      Left = 8
+      Height = 40
+      Top = 472
+      Width = 104
+      AutoFill = True
+      Caption = 'Module:'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 17
+      ClientWidth = 96
+      Items.Strings = (
+        'Protected'
+      )
+      TabOrder = 3
+      Data = {
+        0100000002
+      }
+    end
+    object btnClose: TButton
+      Left = 16
+      Height = 20
+      Hint = 'Stop editing and close this window'
+      Top = 560
+      Width = 80
+      Anchors = [akRight, akBottom]
+      Caption = 'Close'
+      OnClick = btnCloseClick
+      TabOrder = 1
+    end
+    object btnHelp: TButton
+      Left = 16
+      Height = 20
+      Top = 536
+      Width = 80
+      Anchors = [akRight, akBottom]
+      Caption = 'Help'
+      OnClick = btnHelpClick
+      TabOrder = 2
+    end
+    object gbQuestionNumber: TGroupBox
+      Left = 8
+      Height = 70
+      Top = 8
+      Width = 104
+      Align = alTop
+      BorderSpacing.Around = 8
+      Caption = 'Question #'
+      ClientHeight = 47
+      ClientWidth = 96
+      TabOrder = 4
+      object lblQuestionNumber: TLabel
+        Left = 0
+        Height = 47
+        Top = 0
+        Width = 96
+        Align = alClient
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '1'
+        Font.Color = clRed
+        Font.Height = -40
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+    object lblTotalQ: TLabel
+      Left = 8
+      Height = 15
+      Top = 80
+      Width = 104
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'lblTotalQ'
+      ParentColor = False
+    end
+    object gbNavigation: TGroupBox
+      Left = 8
+      Height = 152
+      Top = 240
+      Width = 104
+      Caption = 'Navigation:'
+      ClientHeight = 129
+      ClientWidth = 96
+      TabOrder = 5
+      object btnFind: TButton
+        Left = 8
+        Height = 20
+        Hint = 'Find a word/phrase within the whole question set'
+        Top = 104
+        Width = 80
+        Caption = 'Find'
+        OnClick = btnFindClick
+        ParentFont = False
+        TabOrder = 0
+      end
+      object btnPrev: TButton
+        Left = 8
+        Height = 20
+        Top = 28
+        Width = 80
+        Caption = 'Previous'
+        OnClick = btnPrevClick
+        ParentFont = False
+        TabOrder = 1
+      end
+      object btnFirst: TButton
+        Left = 8
+        Height = 20
+        Top = 4
+        Width = 80
+        Caption = 'First'
+        OnClick = btnFirstClick
+        ParentFont = False
+        TabOrder = 2
+      end
+      object btnNext: TButton
+        Left = 8
+        Height = 20
+        Top = 52
+        Width = 80
+        Caption = 'Next'
+        OnClick = btnNextClick
+        ParentFont = False
+        TabOrder = 3
+      end
+      object btnLast: TButton
+        Left = 8
+        Height = 20
+        Top = 76
+        Width = 80
+        Caption = 'Last'
+        OnClick = btnLastClick
+        ParentFont = False
+        TabOrder = 4
+      end
+    end
+    object gbAddEtc: TGroupBox
+      Left = 8
+      Height = 124
+      Top = 112
+      Width = 104
+      Caption = 'Question:'
+      ClientHeight = 101
+      ClientWidth = 96
+      TabOrder = 6
+      object btnAdd: TButton
+        Left = 9
+        Height = 20
+        Hint = 'Add a question'
+        Top = 4
+        Width = 80
+        Caption = 'Add'
+        OnClick = btnAddClick
+        TabOrder = 0
+      end
+      object btnDelete: TButton
+        Left = 9
+        Height = 20
+        Hint = 'Delete the current question'
+        Top = 28
+        Width = 80
+        Caption = 'Delete'
+        OnClick = btnDeleteClick
+        TabOrder = 1
+      end
+      object btnSave: TButton
+        Left = 9
+        Height = 20
+        Hint = 'Save all additions / amendments'
+        Top = 52
+        Width = 80
+        Caption = 'Save'
+        OnClick = btnSaveClick
+        TabOrder = 2
+      end
+      object btnCancel: TButton
+        Left = 9
+        Height = 20
+        Hint = 'Cancel any changes made'
+        Top = 76
+        Width = 80
+        Caption = 'Cancel'
+        OnClick = btnCancelClick
+        TabOrder = 3
+      end
+    end
+  end
+  object panelLeft: TPanel
+    Left = 0
+    Height = 600
+    Top = 0
+    Width = 680
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 600
+    ClientWidth = 680
+    TabOrder = 1
+    object panelTop: TPanel
+      Left = 8
+      Height = 198
+      Top = 8
+      Width = 664
+      Align = alClient
+      BorderSpacing.Around = 8
+      BevelOuter = bvNone
+      ClientHeight = 198
+      ClientWidth = 664
+      TabOrder = 0
+      object gbQuestion: TGroupBox
+        Left = 0
+        Height = 198
+        Top = 0
+        Width = 425
+        Align = alClient
+        Caption = 'Question:'
+        ClientHeight = 176
+        ClientWidth = 417
+        TabOrder = 0
+        object memoQuestion: TMemo
+          Left = 4
+          Height = 168
+          Hint = 'Enter the question in this box'
+          Top = 4
+          Width = 409
+          Align = alClient
+          BorderSpacing.Around = 4
+          Lines.Strings = (
+            'memoQuestion'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssAutoVertical
+          TabOrder = 0
+        end
+      end
+      object gbExhibit: TGroupBox
+        Left = 433
+        Height = 198
+        Top = 0
+        Width = 231
+        Align = alRight
+        BorderSpacing.Left = 8
+        Caption = 'Exhibit:'
+        ClientHeight = 176
+        ClientWidth = 223
+        TabOrder = 1
+        object panelExhibit: TPanel
+          Left = 4
+          Height = 168
+          Top = 4
+          Width = 138
+          Align = alClient
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 81
+          BorderSpacing.Bottom = 4
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'No Exhibit'
+          ClientHeight = 168
+          ClientWidth = 138
+          Color = clWhite
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 0
+          Wordwrap = True
+          object imgExhibit: TImage
+            Left = 4
+            Height = 160
+            Hint = 'This is the exhibit which will be displayed for this question'
+            Top = 4
+            Width = 130
+            Align = alClient
+            BorderSpacing.Around = 4
+            Center = True
+            Stretch = True
+          end
+        end
+        object btnExhibitAdd: TButton
+          Left = 150
+          Height = 20
+          Hint = 'Add (or change an existing) exhibit for this question'
+          Top = 8
+          Width = 70
+          Anchors = [akTop, akRight]
+          Caption = 'Add'
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          OnClick = btnExhibitAddClick
+          ParentFont = False
+          TabOrder = 1
+        end
+        object btnExhibitDelete: TButton
+          Left = 150
+          Height = 20
+          Hint = 'Delete the exhibit from this question'
+          Top = 32
+          Width = 70
+          Anchors = [akTop, akRight]
+          Caption = 'Delete'
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          OnClick = btnExhibitDeleteClick
+          ParentFont = False
+          TabOrder = 2
+        end
+        object btnExhibitShow: TButton
+          Left = 150
+          Height = 20
+          Hint = 'Display the exhibit full size'
+          Top = 120
+          Width = 70
+          Anchors = [akTop, akRight]
+          Caption = 'Show'
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          OnClick = btnExhibitShowClick
+          ParentFont = False
+          TabOrder = 3
+        end
+        object Label2: TLabel
+          Left = 150
+          Height = 32
+          Top = 64
+          Width = 70
+          Alignment = taCenter
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'Drop an image to add / change'
+          Font.Height = -9
+          Layout = tlCenter
+          ParentColor = False
+          ParentFont = False
+          WordWrap = True
+        end
+      end
+    end
+    object gbAnswers: TGroupBox
+      Left = 8
+      Height = 210
+      Top = 214
+      Width = 664
+      Align = alBottom
+      BorderSpacing.Around = 8
+      Caption = 'Possible Answers:'
+      ClientHeight = 188
+      ClientWidth = 656
+      TabOrder = 1
+      object ScrollBox1: TScrollBox
+        Left = 4
+        Height = 180
+        Hint = 'Answers to choose from'
+        Top = 4
+        Width = 648
+        HorzScrollBar.Page = 1
+        HorzScrollBar.Visible = False
+        VertScrollBar.Page = 180
+        VertScrollBar.Tracking = True
+        Align = alClient
+        BorderSpacing.Around = 4
+        ClientHeight = 180
+        ClientWidth = 633
+        TabOrder = 1
+        object SpeedButton1: TSpeedButton
+          Tag = 1
+          Left = 8
+          Height = 33
+          Top = 20
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          NumGlyphs = 2
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton2: TSpeedButton
+          Tag = 2
+          Left = 8
+          Height = 33
+          Top = 53
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton3: TSpeedButton
+          Tag = 4
+          Left = 8
+          Height = 33
+          Top = 86
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton4: TSpeedButton
+          Tag = 8
+          Left = 8
+          Height = 33
+          Top = 119
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton5: TSpeedButton
+          Tag = 16
+          Left = 8
+          Height = 33
+          Top = 152
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton6: TSpeedButton
+          Tag = 32
+          Left = 8
+          Height = 33
+          Top = 185
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton7: TSpeedButton
+          Tag = 64
+          Left = 8
+          Height = 33
+          Top = 218
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object SpeedButton8: TSpeedButton
+          Tag = 128
+          Left = 8
+          Height = 33
+          Top = 251
+          Width = 33
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          OnClick = SpeedButtonClick
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 4
+          Height = 16
+          Top = 0
+          Width = 46
+          Caption = 'Correct'
+          ParentColor = False
+        end
+        object memoOption1: TMemo
+          Left = 44
+          Height = 33
+          Top = 20
+          Width = 572
+          Lines.Strings = (
+            'memoOption1'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+        object memoOption2: TMemo
+          Left = 44
+          Height = 33
+          Top = 53
+          Width = 572
+          Lines.Strings = (
+            'memoOption2'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 1
+        end
+        object memoOption3: TMemo
+          Left = 44
+          Height = 33
+          Top = 86
+          Width = 572
+          Lines.Strings = (
+            'memoOption3'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 2
+        end
+        object memoOption4: TMemo
+          Left = 44
+          Height = 33
+          Top = 119
+          Width = 572
+          Lines.Strings = (
+            'memoOption4'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 3
+        end
+        object memoOption5: TMemo
+          Left = 44
+          Height = 33
+          Top = 152
+          Width = 572
+          Lines.Strings = (
+            'memoOption5'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 4
+        end
+        object memoOption6: TMemo
+          Left = 44
+          Height = 33
+          Top = 185
+          Width = 572
+          Lines.Strings = (
+            'memoOption6'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 5
+        end
+        object memoOption7: TMemo
+          Left = 44
+          Height = 33
+          Top = 218
+          Width = 572
+          Lines.Strings = (
+            'memoOption7'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 6
+        end
+        object memoOption8: TMemo
+          Left = 44
+          Height = 33
+          Top = 251
+          Width = 572
+          Lines.Strings = (
+            'memoOption8'
+          )
+          OnChange = memoQuestionChange
+          ScrollBars = ssVertical
+          TabOrder = 7
+        end
+      end
+      object cbRandomize: TCheckBox
+        Left = 520
+        Height = 18
+        Hint = 'If checked, answers will be displayed in random order'
+        Top = 6
+        Width = 91
+        Anchors = [akTop, akRight]
+        Caption = 'Randomize'
+        Checked = True
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        OnClick = memoQuestionChange
+        ParentFont = False
+        State = cbChecked
+        TabOrder = 0
+      end
+    end
+    object gbRemarks: TGroupBox
+      Left = 8
+      Height = 160
+      Top = 432
+      Width = 664
+      Align = alBottom
+      BorderSpacing.Around = 8
+      Caption = 'Reference / Comment:'
+      ClientHeight = 138
+      ClientWidth = 656
+      TabOrder = 2
+      object memoRemarks: TMemo
+        Left = 4
+        Height = 130
+        Hint = 'Enter any remarks / comments in this box'
+        Top = 4
+        Width = 648
+        Align = alClient
+        BorderSpacing.Around = 4
+        Lines.Strings = (
+          'memoRemarks'
+        )
+        OnChange = memoQuestionChange
+        ScrollBars = ssAutoVertical
+        TabOrder = 0
+      end
+    end
+  end
+end

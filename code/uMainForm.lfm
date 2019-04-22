@@ -1,0 +1,337 @@
+object MainForm: TMainForm
+  Left = 3224
+  Height = 400
+  Top = 172
+  Width = 600
+  AllowDropFiles = True
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'TestMaster'
+  ClientHeight = 400
+  ClientWidth = 600
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 600
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  KeyPreview = True
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnDropFiles = FormDropFiles
+  OnKeyDown = FormKeyDown
+  OnResize = FormResize
+  OnShow = FormShow
+  ShowHint = True
+  LCLVersion = '2.0.1.0'
+  object FileListBox1: TFileListBox
+    Left = 8
+    Height = 348
+    Hint = 'List of the question sets available'
+    Top = 8
+    Width = 137
+    Align = alLeft
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 44
+    Directory = '/'
+    ItemHeight = 0
+    Mask = '*.tmq;*.tmq4;*.tmqz'
+    OnClick = FileListBox1Click
+    OnDblClick = FileListBox1DblClick
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 153
+    Height = 348
+    Top = 8
+    Width = 439
+    Align = alClient
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 44
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    ClientHeight = 348
+    ClientWidth = 439
+    TabOrder = 1
+    object Panel2: TPanel
+      Left = 0
+      Height = 290
+      Top = 58
+      Width = 439
+      Align = alClient
+      BorderSpacing.Top = 8
+      Caption = 'Panel2'
+      ClientHeight = 290
+      ClientWidth = 439
+      Color = clWhite
+      ParentColor = False
+      TabOrder = 0
+      object memoInfo: TMemo
+        Left = 7
+        Height = 276
+        Hint = 'The question set summary'
+        Top = 7
+        Width = 425
+        Align = alClient
+        BorderSpacing.Around = 6
+        BorderStyle = bsNone
+        ParentColor = True
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object panelLogo: TPanel
+      Left = 0
+      Height = 50
+      Top = 0
+      Width = 439
+      Align = alTop
+      Caption = 'panelLogo'
+      ClientHeight = 50
+      ClientWidth = 439
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      ParentFont = False
+      TabOrder = 1
+      object imgLogo: TImage
+        Left = 1
+        Height = 48
+        Top = 1
+        Width = 437
+        Align = alClient
+      end
+    end
+  end
+  object btnEdit: TButton
+    Left = 100
+    Height = 20
+    Hint = 'Edit the highlighted question set'
+    Top = 367
+    Width = 60
+    Anchors = [akLeft, akBottom]
+    Caption = 'Edit'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnEditClick
+    ParentFont = False
+    TabOrder = 2
+  end
+  object btnStart: TButton
+    Left = 16
+    Height = 20
+    Hint = 'Run the highlighted test'
+    Top = 367
+    Width = 76
+    Anchors = [akLeft, akBottom]
+    Caption = 'Start test'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnStartClick
+    ParentFont = False
+    TabOrder = 3
+  end
+  object btnExit: TButton
+    Left = 522
+    Height = 20
+    Hint = 'Exit this program'
+    Top = 367
+    Width = 60
+    Anchors = [akRight, akBottom]
+    Caption = 'Exit'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnExitClick
+    ParentFont = False
+    TabOrder = 4
+  end
+  object btnAdd: TButton
+    Left = 168
+    Height = 20
+    Hint = 'Add a new question set'
+    Top = 367
+    Width = 60
+    Anchors = [akLeft, akBottom]
+    Caption = 'Add'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnAddClick
+    ParentFont = False
+    TabOrder = 5
+  end
+  object btnDelete: TButton
+    Left = 236
+    Height = 20
+    Hint = 'Delete the highlighted question set (cannot be undone)'
+    Top = 367
+    Width = 60
+    Anchors = [akLeft, akBottom]
+    Caption = 'Delete'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnDeleteClick
+    ParentFont = False
+    TabOrder = 6
+  end
+  object btnHelp: TButton
+    Left = 454
+    Height = 20
+    Top = 367
+    Width = 60
+    Anchors = [akRight, akBottom]
+    Caption = 'Help'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnHelpClick
+    ParentFont = False
+    TabOrder = 7
+  end
+  object Label2: TLabel
+    Left = 304
+    Height = 32
+    Top = 360
+    Width = 70
+    Alignment = taCenter
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = 'Drop a TMQZ to add to list'
+    Font.Height = -9
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object MainMenu1: TMainMenu
+    left = 416
+    top = 16
+    object menuMac: TMenuItem
+      Caption = 'Testmaster'
+      object menuAboutMac: TMenuItem
+        Caption = 'About Testmaster'
+        OnClick = menuAboutWindowsClick
+      end
+    end
+    object menuApplication: TMenuItem
+      Caption = '&Application'
+      object menuResults: TMenuItem
+        Caption = 'Results'
+        OnClick = MenuResultsClick
+      end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object menuShowHints: TMenuItem
+        Caption = 'Show Hints'
+        OnClick = menuShowHintsClick
+      end
+      object MenuItem1: TMenuItem
+        Caption = '-'
+      end
+      object menuFontSizeSmall: TMenuItem
+        Tag = 8
+        Caption = 'Font Size - Small'
+        GroupIndex = 1
+        RadioItem = True
+        OnClick = FontSizeClick
+      end
+      object menuFontSizeMedium: TMenuItem
+        Tag = 10
+        Caption = 'Font Size - Medium'
+        GroupIndex = 1
+        RadioItem = True
+        OnClick = FontSizeClick
+      end
+      object menuFontsizeLarge: TMenuItem
+        Tag = 12
+        Caption = 'Font size - Large'
+        GroupIndex = 1
+        RadioItem = True
+        OnClick = FontSizeClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object menuElapsedTime: TMenuItem
+        Caption = 'Elapsed Time'
+        Checked = True
+        GroupIndex = 2
+        RadioItem = True
+        OnClick = ElapsedTimeClick
+      end
+      object menuTimeRemaining: TMenuItem
+        Caption = 'Time Remaining'
+        GroupIndex = 2
+        RadioItem = True
+        OnClick = ElapsedTimeClick
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object menuAdministrator: TMenuItem
+        Caption = 'Administrator...'
+        Visible = False
+        OnClick = menuAdministratorClick
+      end
+      object menuSep1: TMenuItem
+        Caption = '-'
+        Visible = False
+      end
+      object menuExitWindows: TMenuItem
+        Caption = 'E&xit'
+        Visible = False
+        OnClick = btnExitClick
+      end
+    end
+    object menuHelp: TMenuItem
+      Caption = '&Help'
+      object menuTestmasterHelp: TMenuItem
+        Caption = 'Testmaster Help'
+        OnClick = menuTestmasterHelpClick
+      end
+      object menuSep2: TMenuItem
+        Caption = '-'
+        Visible = False
+      end
+      object menuAboutWindows: TMenuItem
+        Caption = '&About'
+        Visible = False
+        OnClick = menuAboutWindowsClick
+      end
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBtnFace
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 304
+    top = 16
+  end
+end

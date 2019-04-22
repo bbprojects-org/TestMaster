@@ -1,0 +1,61 @@
+object ResultsForm: TResultsForm
+  Left = 2608
+  Height = 200
+  Top = 62
+  Width = 400
+  Caption = 'Results Summary'
+  ClientHeight = 200
+  ClientWidth = 400
+  Constraints.MinHeight = 200
+  Constraints.MinWidth = 400
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  ParentFont = True
+  LCLVersion = '2.0.1.0'
+  object btnClose: TButton
+    Left = 325
+    Height = 20
+    Hint = 'Close this window'
+    Top = 173
+    Width = 60
+    Anchors = [akRight, akBottom]
+    Caption = 'Close'
+    Default = True
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnCloseClick
+    ParentFont = False
+    TabOrder = 0
+  end
+  object btnClear: TButton
+    Left = 256
+    Height = 20
+    Hint = 'Delete all results from the summary file'
+    Top = 173
+    Width = 60
+    Anchors = [akRight, akBottom]
+    Caption = 'Clear'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnClearClick
+    ParentFont = False
+    TabOrder = 1
+  end
+  object memoResults: TMemo
+    Left = 8
+    Height = 158
+    Hint = 'List of saved results of all test sessions'
+    Top = 8
+    Width = 384
+    Align = alClient
+    BorderSpacing.Bottom = 26
+    BorderSpacing.Around = 8
+    HideSelection = False
+    OnChange = memoResultsChange
+    ScrollBars = ssAutoBoth
+    TabOrder = 2
+  end
+end

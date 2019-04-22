@@ -1,0 +1,66 @@
+object SearchForm: TSearchForm
+  Left = 3410
+  Height = 105
+  Top = 83
+  Width = 296
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Find'
+  ClientHeight = 105
+  ClientWidth = 296
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  ShowHint = True
+  LCLVersion = '2.0.1.0'
+  object GroupBox1: TGroupBox
+    Left = 8
+    Height = 88
+    Top = 8
+    Width = 280
+    Caption = 'Word or phrase to search for:'
+    ClientHeight = 65
+    ClientWidth = 272
+    TabOrder = 0
+    object edSearchString: TEdit
+      Left = 8
+      Height = 22
+      Top = 8
+      Width = 256
+      TabOrder = 0
+    end
+    object btnFirst: TButton
+      Left = 128
+      Height = 20
+      Hint = 'Find the first instance of the search text in the question set'
+      Top = 36
+      Width = 60
+      Caption = 'First'
+      OnClick = btnFirstClick
+      TabOrder = 1
+    end
+    object btnNext: TButton
+      Left = 192
+      Height = 20
+      Hint = 'Find the next occurrence of the search text in the question set'
+      Top = 36
+      Width = 60
+      Caption = 'Next'
+      OnClick = btnNextClick
+      TabOrder = 2
+    end
+    object lblMessage: TLabel
+      Left = 8
+      Height = 17
+      Top = 39
+      Width = 54
+      Caption = 'Message'
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+end

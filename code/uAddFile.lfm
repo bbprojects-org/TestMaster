@@ -1,0 +1,49 @@
+object GetFilename: TGetFilename
+  Left = 2586
+  Height = 86
+  Top = 97
+  Width = 236
+  BorderIcons = [biMinimize, biMaximize]
+  BorderStyle = bsDialog
+  Caption = 'Add'
+  ClientHeight = 86
+  ClientWidth = 236
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '2.0.1.0'
+  object btnOk: TButton
+    Left = 160
+    Height = 20
+    Top = 57
+    Width = 60
+    Caption = 'OK'
+    Default = True
+    Enabled = False
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object btnCancel: TButton
+    Left = 96
+    Height = 20
+    Top = 57
+    Width = 60
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object edFilename: TLabeledEdit
+    Left = 8
+    Height = 22
+    Top = 28
+    Width = 220
+    EditLabel.Height = 15
+    EditLabel.Width = 220
+    EditLabel.Caption = 'Enter name for new question set:'
+    EditLabel.ParentColor = False
+    TabOrder = 2
+    OnChange = edFilenameChange
+  end
+end

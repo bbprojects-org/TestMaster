@@ -1,0 +1,174 @@
+object AdminOptions: TAdminOptions
+  Left = 3404
+  Height = 225
+  Top = 82
+  Width = 328
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Administrator Options'
+  ClientHeight = 225
+  ClientWidth = 328
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  ShowHint = True
+  LCLVersion = '2.0.1.0'
+  object btnOk: TButton
+    Left = 248
+    Height = 20
+    Hint = 'Exit this dialog, save options as displayed'
+    Top = 186
+    Width = 60
+    Caption = 'OK'
+    Default = True
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ModalResult = 1
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 145
+    Top = 8
+    Width = 305
+    BevelOuter = bvLowered
+    ClientHeight = 145
+    ClientWidth = 305
+    TabOrder = 2
+    object cbDeletePermitted: TCheckBox
+      Left = 16
+      Height = 18
+      Hint = 'If Add/Edit buttons are enabled this allows question sets to be deleted if enabled'
+      Top = 80
+      Width = 241
+      Caption = 'Enable question sets Delete button'
+      TabOrder = 0
+    end
+    object cbEnableAnswers: TCheckBox
+      Left = 16
+      Height = 18
+      Hint = 'When enabled allows users to view the correct answer'
+      Top = 8
+      Width = 163
+      Caption = 'Enable answers button'
+      TabOrder = 1
+    end
+    object cbAllowEdits: TCheckBox
+      Left = 16
+      Height = 18
+      Hint = 'When enabled the Add/Edit/Delete question set buttons are visible, otherwise they are hidden'
+      Top = 64
+      Width = 263
+      Caption = 'Enable question sets Add/Edit buttons'
+      OnClick = cbAllowEditsClick
+      TabOrder = 2
+    end
+    object btnScreenColor: TButton
+      Left = 16
+      Height = 20
+      Hint = 'Sets the background colour for the test screen'
+      Top = 109
+      Width = 168
+      Caption = 'Set test screen colour:'
+      OnClick = btnScreenColorClick
+      TabOrder = 3
+    end
+    object panelColour: TPanel
+      Left = 192
+      Height = 20
+      Hint = 'This shows what the test screen colour will be'
+      Top = 109
+      Width = 100
+      BevelOuter = bvLowered
+      Caption = 'Screen Colour'
+      TabOrder = 4
+    end
+    object cbEnableClearResults: TCheckBox
+      Left = 16
+      Height = 18
+      Hint = 'When enabled allows the user to clear the contents of the result file'
+      Top = 24
+      Width = 189
+      Caption = 'Enable clear results button'
+      TabOrder = 5
+    end
+    object cbEnableRunningScore: TCheckBox
+      Left = 16
+      Height = 18
+      Hint = 'When enabled shows running score as each question is answered'
+      Top = 40
+      Width = 153
+      Caption = 'Enable running score'
+      TabOrder = 6
+    end
+  end
+  object btnCancel: TButton
+    Left = 184
+    Height = 20
+    Hint = 'Exit this dialog, do not save any changes'
+    Top = 186
+    Width = 60
+    Caption = 'Cancel'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ModalResult = 2
+    ParentFont = False
+    TabOrder = 1
+  end
+  object btnChangePassword: TButton
+    Left = 24
+    Height = 20
+    Hint = 'Change the administrator password'
+    Top = 160
+    Width = 144
+    Caption = 'Change Password'
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnClick = btnChangePasswordClick
+    ParentFont = False
+    TabOrder = 3
+  end
+  object btnDefault: TButton
+    Left = 24
+    Height = 20
+    Hint = 'Reset options to their default settings'
+    Top = 186
+    Width = 144
+    Caption = 'Reset to Defaults'
+    OnClick = btnDefaultClick
+    TabOrder = 4
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 248
+    top = 16
+  end
+end
