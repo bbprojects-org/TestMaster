@@ -2,7 +2,7 @@
 
 In 1998 whilst undertaking my training for Microsoft Certified Systems Engineer (MCSE), I developed a program to create, edit and execute multiple-choice questions… TestMaster. It was written in Pascal using Borland Delphi.
 
-Many people have used it over the years and I had reason recently to resurrect it, although now I am Mac based and use Lazarus/FPC in lieu of Delphi, so it got some ported and some rework too.
+Many people have used it over the years and I had reason recently to resurrect it, although now I am Mac based and use Lazarus/FPC in lieu of Delphi, so it got ported and some rework too.
 
 TestMaster provides the following features:
 
