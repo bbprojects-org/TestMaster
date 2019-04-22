@@ -46,7 +46,9 @@
 ### 23 September 1998 (v1.01)
 
 - Added basic help files (using HTML files and simple embedded browser)
-Corrected bugs:
-1. Gave incorrect results if used Goto to view questions rather than Next/Previous buttons
-2. Occasionally failed to add a new question in edit mode - overwrote a previous question instead
-5 Sep 98	v1.00	First release
+- Corrected bug; Gave incorrect results if used Goto to view questions rather than Next/Previous buttons
+- Corrected bug; Occasionally failed to add a new question in edit mode - overwrote a previous question instead
+
+### 5 September 1998	(v1.00)
+
+- First release
