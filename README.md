@@ -18,7 +18,7 @@ TestMaster provides the following features:
 
 Some of the features of the original program have been removed as they are no longer relevant to open-source software:
 
-- restriction if not-registered
+- restrictions if not-registered
 - encrypted data files
 
 ## License
