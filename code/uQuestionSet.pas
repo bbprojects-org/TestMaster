@@ -39,7 +39,7 @@ type
   TQuestion = record
     Question: string;
     QuestionType: byte;
-    Randomize: boolean;
+    Randomise: boolean;
     Option1: string;
     Option2: string;
     Option3: string;
@@ -171,8 +171,8 @@ begin
                        'up to 120 pixels high, and the width of the summary section of the window.' + CRLF + CRLF +
                        'Entered: ' + FormatDateTime('DD MMM YYYY', Now);
   fQSet[0].QuestionType := 1;
-  fQSet[0].Randomize := True;
-  fQSet[0].Option1 := 'If this box is selected, question order will be randomized';
+  fQSet[0].Randomise := True;
+  fQSet[0].Option1 := 'If this box is selected, question order will be randomised';
   fQSet[0].Option2 := '';
   fQSet[0].Option3 := '';
   fQSet[0].Option4 := '';
@@ -207,7 +207,7 @@ begin
             ThisQuestion := fQSet[i];
             WriteStr(Stream, ThisQuestion.Question);
             Stream.Write(ThisQuestion.QuestionType, 1);
-            Stream.Write(ThisQuestion.Randomize, SizeOf(Boolean));
+            Stream.Write(ThisQuestion.Randomise, SizeOf(Boolean));
             WriteStr(Stream, ThisQuestion.Option1);
             WriteStr(Stream, ThisQuestion.Option2);
             WriteStr(Stream, ThisQuestion.Option3);
@@ -262,7 +262,7 @@ begin
       begin
         ReadStr(Stream, fQSet[i].Question);
         Stream.Read(fQSet[i].QuestionType, 1);
-        Stream.Read(fQSet[i].Randomize, SizeOf(Boolean));
+        Stream.Read(fQSet[i].Randomise, SizeOf(Boolean));
         ReadStr(Stream, fQSet[i].Option1);
         ReadStr(Stream, fQSet[i].Option2);
         ReadStr(Stream, fQSet[i].Option3);

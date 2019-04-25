@@ -56,7 +56,7 @@ type
     btnLast: TButton;
     btnNext: TButton;
     btnPrev: TButton;
-    cbRandomize: TCheckBox;
+    cbRandomise: TCheckBox;
     gbAnswers: TGroupBox;
     gbExhibit: TGroupBox;
     gbNavigation: TGroupBox;
@@ -251,7 +251,7 @@ begin
   with fQSetRef.CurrentQuestion do
   begin                                 // Set all local values and show them
     rgAnswerType.ItemIndex := QuestionType;
-    cbRandomize.Checked := Randomize;
+    cbRandomise.Checked := Randomise;
     memoQuestion.Text := Question;
     memoOption1.Text  := Option1;
     memoOption2.Text  := Option2;
@@ -421,7 +421,7 @@ begin
     begin
       SetEdit(tsAdd);
       rgAnswerType.ItemIndex := 0;      // Set empty question
-      cbRandomize.Checked := True;
+      cbRandomise.Checked := True;
       memoQuestion.Text := '';
       memoOption1.Text  := '';
       memoOption2.Text  := '';
@@ -466,7 +466,7 @@ begin
   with TempQ do                        // Save all local variables to QSet
   begin
     QuestionType := rgAnswerType.ItemIndex;
-    Randomize    := cbRandomize.Checked;
+    Randomise    := cbRandomise.Checked;
     Question := memoQuestion.Text;
     Option1  := memoOption1.Text;
     Option2  := memoOption2.Text;

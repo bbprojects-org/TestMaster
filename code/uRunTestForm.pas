@@ -443,7 +443,7 @@ begin
   while length(uOptionsForm[NumOpts+1]) > 0 do
     inc(NumOpts);
 
-  // If not randomized, do it now
+  // If not randomised, do it now
   if (AnswerOrder[fQSetRef.CurrentIndex, 1] = 0) then
     OrderAnswers(NumOpts);
 
@@ -736,7 +736,7 @@ var
 begin
   for i := 1 to 8 do
     AnswerOrder[fQSetRef.CurrentIndex, i] := i; // Initialise options order array
-  if (fQSetRef.CurrentQuestion.Randomize) then
+  if (fQSetRef.CurrentQuestion.Randomise) then
     begin
       Randomize;
       for i := NumOpts downto 2 do      // Assumes always 2 choices or more

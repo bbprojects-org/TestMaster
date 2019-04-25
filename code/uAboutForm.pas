@@ -55,7 +55,7 @@ type
   end;
 
 const
-  APP_VERSION = '4.02';
+  APP_VERSION = '4.03';
   APP_COPYRIGHT = 'Copyright RC Beveridge, 1998-2019';
 
 

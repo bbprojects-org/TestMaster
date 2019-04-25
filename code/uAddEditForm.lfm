@@ -631,14 +631,14 @@ object AddEditForm: TAddEditForm
           TabStop = False
         end
       end
-      object cbRandomize: TCheckBox
+      object cbRandomise: TCheckBox
         Left = 531
         Height = 18
         Hint = 'If checked, answers will be displayed in random order'
         Top = 6
         Width = 80
         Anchors = [akTop, akRight]
-        Caption = 'Randomize'
+        Caption = 'Randomise'
         Checked = True
         Font.Color = clWindowText
         Font.Height = -11
