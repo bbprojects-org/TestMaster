@@ -69,10 +69,10 @@ const
 
 procedure TShowExhibitForm.FormCreate(Sender: TObject);
 begin
-  Left := AppCfg.ReadInteger(SECT_CFG, INI_WDW_LEFT, 40);
-  Top := AppCfg.ReadInteger(SECT_CFG, INI_WDW_TOP, 40);
-  Width := AppCfg.ReadInteger(SECT_CFG, INI_WDW_WIDTH, 600);
-  Height := AppCfg.ReadInteger(SECT_CFG, INI_WDW_HEIGHT, 400);
+  Left := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_LEFT, 40);
+  Top := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_TOP, 40);
+  Width := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_WIDTH, 600);
+  Height := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_HEIGHT, 400);
   //
   ImageLoaded := '';
 end;
@@ -82,10 +82,10 @@ end;
 
 procedure TShowExhibitForm.FormDestroy(Sender: TObject);
 begin                                       
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_LEFT, Left);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_TOP, Top);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_WIDTH, Width);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_HEIGHT, Height);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_LEFT, Left);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_TOP, Top);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_WIDTH, Width);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_HEIGHT, Height);
 end;
 
 

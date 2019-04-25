@@ -74,12 +74,12 @@ const
 
 procedure TResultsForm.FormCreate(Sender: TObject);
 begin                                      
-  Left := AppCfg.ReadInteger(SECT_CFG, INI_WDW_LEFT, 40);
-  Top := AppCfg.ReadInteger(SECT_CFG, INI_WDW_TOP, 40);
-  Width := AppCfg.ReadInteger(SECT_CFG, INI_WDW_WIDTH, 0);
-  Height := AppCfg.ReadInteger(SECT_CFG, INI_WDW_HEIGHT, 0);
+  Left := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_LEFT, 40);
+  Top := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_TOP, 40);
+  Width := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_WIDTH, 0);
+  Height := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_HEIGHT, 0);
   //
-  ResultsFile := GetAppDataDirectory + 'results.txt';
+  ResultsFile := GetAppDataDirectory(adUser) + 'results.txt';
   Initialise := True;
   if (FileExists(ResultsFile)) then
     memoResults.Lines.LoadFromFile(ResultsFile)
@@ -94,10 +94,10 @@ end;
 
 procedure TResultsForm.FormDestroy(Sender: TObject);
 begin     
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_LEFT, Left);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_TOP, Top);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_WIDTH, Width);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_HEIGHT, Height);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_LEFT, Left);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_TOP, Top);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_WIDTH, Width);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_HEIGHT, Height);
   //
   if (IsModified) then
     memoResults.Lines.SaveToFile(ResultsFile);

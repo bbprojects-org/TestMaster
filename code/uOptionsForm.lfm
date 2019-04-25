@@ -14,7 +14,7 @@ object AdminOptions: TAdminOptions
   OnShow = FormShow
   Position = poOwnerFormCenter
   ShowHint = True
-  LCLVersion = '2.0.1.0'
+  LCLVersion = '2.0.3.0'
   object btnOk: TButton
     Left = 248
     Height = 20
@@ -28,7 +28,7 @@ object AdminOptions: TAdminOptions
     Font.Name = 'MS Sans Serif'
     ModalResult = 1
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 2
   end
   object Panel1: TPanel
     Left = 8
@@ -38,34 +38,34 @@ object AdminOptions: TAdminOptions
     BevelOuter = bvLowered
     ClientHeight = 145
     ClientWidth = 305
-    TabOrder = 2
+    TabOrder = 0
     object cbDeletePermitted: TCheckBox
       Left = 16
       Height = 18
       Hint = 'If Add/Edit buttons are enabled this allows question sets to be deleted if enabled'
       Top = 80
-      Width = 241
+      Width = 206
       Caption = 'Enable question sets Delete button'
-      TabOrder = 0
+      TabOrder = 4
     end
     object cbEnableAnswers: TCheckBox
       Left = 16
       Height = 18
       Hint = 'When enabled allows users to view the correct answer'
       Top = 8
-      Width = 163
+      Width = 141
       Caption = 'Enable answers button'
-      TabOrder = 1
+      TabOrder = 0
     end
     object cbAllowEdits: TCheckBox
       Left = 16
       Height = 18
       Hint = 'When enabled the Add/Edit/Delete question set buttons are visible, otherwise they are hidden'
       Top = 64
-      Width = 263
+      Width = 223
       Caption = 'Enable question sets Add/Edit buttons'
       OnClick = cbAllowEditsClick
-      TabOrder = 2
+      TabOrder = 3
     end
     object btnScreenColor: TButton
       Left = 16
@@ -75,7 +75,7 @@ object AdminOptions: TAdminOptions
       Width = 168
       Caption = 'Set test screen colour:'
       OnClick = btnScreenColorClick
-      TabOrder = 3
+      TabOrder = 5
     end
     object panelColour: TPanel
       Left = 192
@@ -85,25 +85,25 @@ object AdminOptions: TAdminOptions
       Width = 100
       BevelOuter = bvLowered
       Caption = 'Screen Colour'
-      TabOrder = 4
+      TabOrder = 6
     end
     object cbEnableClearResults: TCheckBox
       Left = 16
       Height = 18
       Hint = 'When enabled allows the user to clear the contents of the result file'
       Top = 24
-      Width = 189
+      Width = 163
       Caption = 'Enable clear results button'
-      TabOrder = 5
+      TabOrder = 1
     end
     object cbEnableRunningScore: TCheckBox
       Left = 16
       Height = 18
       Hint = 'When enabled shows running score as each question is answered'
       Top = 40
-      Width = 153
+      Width = 133
       Caption = 'Enable running score'
-      TabOrder = 6
+      TabOrder = 2
     end
   end
   object btnCancel: TButton
@@ -118,7 +118,7 @@ object AdminOptions: TAdminOptions
     Font.Name = 'MS Sans Serif'
     ModalResult = 2
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 3
   end
   object btnChangePassword: TButton
     Left = 24
@@ -132,7 +132,7 @@ object AdminOptions: TAdminOptions
     Font.Name = 'MS Sans Serif'
     OnClick = btnChangePasswordClick
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 1
   end
   object btnDefault: TButton
     Left = 24

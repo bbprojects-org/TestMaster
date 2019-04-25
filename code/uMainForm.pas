@@ -25,20 +25,17 @@
 
   =============================================================================}
                                                                     
-{ TODO : Write convertor to change file from TMQ to TMQ4 }
+{ TODO : Write convertor to change old files from TMQ to TMQZ }
 
 { TODO : Compile, test and amend, on Windows X64. Check button orders OK }
-                                                                      
-{ TODO : Check all tab operations }
-{ TODO : Check still have all hints (since deleted/replaced a lot) }
-{ TODO : Encrypt password properly with AES rather than Scramble }                    
-{ TODO : If TMQ4 is protected, encrypt with AES rather than "+17" }
+
+{ TODO : Encrypt password and strings properly with DES rather than Scramble }
 { TODO : Allow exhibit manager to look for files anywhere }          
 { TODO : If change/delete Exhibit, delete redundant image file on save }
+{ TODO : Make a TestMaster icon file }
 
 { TODO : BUG : FontSize/Hints not working in RunTestForm. Works ok in AddEditForm? }
 { TODO : BUG : How keep selected item in view in scrollbar (e.g. Goto listbox ) }
-{ TODO : BUG : No longer doing results correctly, only wrong ones? }               
 { TODO : BUG : Changing exhibit - when drop on cannot find it sometimes }
 
 unit uMainForm;
@@ -59,7 +56,7 @@ type
 
   TMainForm = class(TForm)
     FileListBox1: TFileListBox;
-    Label2: TLabel;
+    lblDropHelp: TLabel;
     memoInfo: TMemo;
     MenuItem1: TMenuItem;
     menuAboutMac: TMenuItem;
@@ -81,7 +78,6 @@ type
     menuTestmasterHelp: TMenuItem;
     menuSep2: TMenuItem;
     menuAboutWindows: TMenuItem;
-    ColorDialog1: TColorDialog;
     menuSep1: TMenuItem;
     menuAdministrator: TMenuItem;
     menuFontSizeSmall: TMenuItem;
@@ -142,19 +138,22 @@ uses
 
 const
   SECT_CFG = 'MainForm';
-  INI_FILENAME = 'QFile';
+  CFG_FILENAME = 'QFile';
 
-  TESTMASTER_OPT_FILE   = 'TestMaster.opt4';
-  TESTMASTER_OPT_VER    = 'OPT_V4';
-  DEFAULT_ADMIN_PW      = 'FIBONACCI';
-  QSET_ZIP_FILENAME     = 'qset.tmq4';
-  TESTMASTER_EXTENSION  = '.tmqz';
-  DROP_EXTENSIONS       = TESTMASTER_EXTENSION;
+  TESTMASTER_OPT_FILE = 'TestMaster.opt4';
+  TESTMASTER_CFG_FILE = 'TestMaster.cfg';
+  TESTMASTER_OPT_VER  = 'OPT_V4';
+  DEFAULT_ADMIN_PW    = 'FIBONACCI';
+  QSET_ZIP_FILENAME   = 'qset.tmq4';
+  TESTMASTER_EXT      = '.tmqz';
+  DROP_EXTS           = TESTMASTER_EXT;
   FILELISTBOX_MAX_WIDTH = 300;
 
 { CREATE }
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  tmpDir: string;
 begin                          
   {$ifdef darwin}
     menuMac.Caption := #$EF#$A3#$BF;    // 'Apple logo', add this to App menu
@@ -167,20 +166,26 @@ begin
     menuAboutWindows.Visible := True;
   {$endif}
 
-  AppCfg := TConfigFile.Create(APP_FILE);
+  tmpDir := GetAppDataDirectory(adGlobal);
+  if (not DirectoryExists(tmpDir)) then     // Ensure there is an App Data folder
+    ForceDirectories(tmpDir);
+  AppCfg := TConfigFile.Create(tmpDir + TESTMASTER_CFG_FILE);
+  //
+  tmpDir := GetAppTestsDirectory;
+  if (not DirectoryExists(tmpDir)) then     // Ensure there is a Tests folder
+    ForceDirectories(tmpDir);
+  //
+  AppTempDirectory := GetAppTempDirectory;  // For unzipped TMQZ files
+  //
   QSet := TQuestionSet.Create;
   AppPassword := '';
   AppTimer := 60;
   //
-  Left := AppCfg.ReadInteger(SECT_CFG, INI_WDW_LEFT, 40);
-  Top := AppCfg.ReadInteger(SECT_CFG, INI_WDW_TOP, 40);
-  Width := AppCfg.ReadInteger(SECT_CFG, INI_WDW_WIDTH, 0);
-  Height := AppCfg.ReadInteger(SECT_CFG, INI_WDW_HEIGHT, 0);
-  AppQFilename := AppCfg.ReadString(SECT_CFG, INI_FILENAME, '');
-  //
-  if (not DirectoryExists(GetAppTestsDirectory)) then
-    ForceDirectories(GetAppTestsDirectory);
-  AppTempDirectory := GetAppTempDirectory;  // For unzipped files
+  Left := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_LEFT, 40);
+  Top := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_TOP, 40);
+  Width := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_WIDTH, 0);
+  Height := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_HEIGHT, 0);
+  AppQFilename := AppCfg.ReadString(SECT_CFG, CFG_FILENAME, '');
 end;
 
 
@@ -189,11 +194,11 @@ end;
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   //
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_LEFT, Left);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_TOP, Top);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_WIDTH, Width);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_HEIGHT, Height);
-  AppCfg.WriteString(SECT_CFG, INI_FILENAME, AppQFilename);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_LEFT, Left);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_TOP, Top);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_WIDTH, Width);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_HEIGHT, Height);
+  AppCfg.WriteString(SECT_CFG, CFG_FILENAME, AppQFilename);
   //
   QSet.Free;
   AppCfg.Free;
@@ -229,7 +234,7 @@ begin
           if (ThisIndex =  -1) then     // Not found, might have been deleted?
             ThisIndex :=  0;
         end;
-      FileListBox1.ItemIndex :=  ThisIndex;
+      FileListBox1.ItemIndex := ThisIndex;
       btnStart.Enabled  := True;
       btnEdit.Enabled   := True;
       btnDelete.Enabled := AdminOptions.IsDeleteEnabled;
@@ -238,14 +243,24 @@ begin
 end;
 
 
+{ LOAD LOGO }
+
+{ If a filename is provided then load requested logo if it exists. If empty
+  filename then check for a custom logo in the global data folder, otherwise
+  load the default logo from the AppDirectory }
+
 function TMainForm.LoadLogo(LogoFilename: string): boolean;
 var
   ThisLogoFilename: string;
 begin
   Result := True;
   ThisLogoFilename := LogoFilename;
-  if (LogoFilename = '') then
-    ThisLogoFilename := GetAppDirectory + 'logo.png';
+  if (ThisLogoFilename = '') then
+    begin
+      ThisLogoFilename := GetAppDataDirectory(adGlobal) + 'custom_logo.png';
+      if (not FileExists(ThisLogoFilename)) then
+        ThisLogoFilename := GetAppDirectory + 'logo.png';
+    end;
   if (FileExists(ThisLogoFilename)) then
     begin
       LoadImage(imgLogo, ThisLogoFilename);
@@ -254,6 +269,7 @@ begin
     end
   else
     begin
+      imgLogo.Picture.Clear;
       panelLogo.Caption := 'Cannot find logo file:' + CRLF + ThisLogoFilename;
       Result := False;
     end;
@@ -383,7 +399,7 @@ begin
   try
     if (GetFileName.ShowModal = mrOk) then
       begin
-        AppQFilename := GetFilename.Filename + TESTMASTER_EXTENSION;
+        AppQFilename := GetFilename.Filename + TESTMASTER_EXT;
         Destination := GetAppTestsDirectory + AppQFilename;
         if FileExists(Destination) then
           if (not MessageQuery('Add Question Set', 'A question set already exists with filename: "' + AppQFilename + '". Overwrite?')) then
@@ -439,7 +455,8 @@ end;
   enable the answer button! If a 'hacker' thinks they can get around this by
   simply deleting the file this results in the program creating a new one in a
   locked down status. If it is that important to the 'hacker' it can be
-  bypassed as I have also had to set a default password! }
+  bypassed as I have also had to set a default password! It is not unreasonable
+  to assume an examiner has locked down their PC from user tampering }
 
 
 { WRITE STATUS }
@@ -449,7 +466,7 @@ var
   Stream: TFileStream;
   ByteVar: byte;
 begin
-  Stream := TFileStream.Create(GetAppDirectory + TESTMASTER_OPT_FILE, fmCreate);
+  Stream := TFileStream.Create(GetAppDataDirectory(adGlobal) + TESTMASTER_OPT_FILE, fmCreate);
   try
     WriteStr(Stream, TESTMASTER_OPT_VER);
     Stream.Write(menuShowHints.Checked, SizeOf(Boolean));             
@@ -493,7 +510,7 @@ var
   OptFile: string;
   IsFileMissing: boolean;
 begin
-  OptFile := GetAppDirectory + TESTMASTER_OPT_FILE;
+  OptFile := GetAppDataDirectory(adGlobal) + TESTMASTER_OPT_FILE;
   IsFileMissing := IsFirst and (not FileExists(OptFile));
   if (IsFileMissing) then
     CreateLockedDownStatus
@@ -551,6 +568,10 @@ begin
   btnEdit.Visible := AdminOptions.IsAddEditEnabled;
   btnAdd.Visible := AdminOptions.IsAddEditEnabled;
   btnDelete.Visible := AdminOptions.IsAddEditEnabled;
+  if (AdminOptions.IsAddEditEnabled) then
+    lblDropHelp.Left := btnDelete.Left + 68
+  else
+    lblDropHelp.Left := btnStart.Left + 68 + 16; // Start button is 16px wider
   //
   if (IsFileMissing or (OptVer <> TESTMASTER_OPT_VER)) then
     WriteStatus;
@@ -701,7 +722,7 @@ begin
     begin
       FromFilename := FileNames[i];
       ToFilename := GetAppTestsDirectory + ExtractFilename(FromFilename);
-      if (FromFilename <> '') and (Pos(LowerCase(ExtractFileExt(FromFilename)), DROP_EXTENSIONS) > 0) then
+      if (FromFilename <> '') and (Pos(LowerCase(ExtractFileExt(FromFilename)), DROP_EXTS) > 0) then
         begin
           CopyFile(FromFilename, ToFilename);
           Inc(Count);

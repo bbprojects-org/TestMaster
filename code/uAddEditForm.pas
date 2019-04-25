@@ -57,7 +57,6 @@ type
     btnNext: TButton;
     btnPrev: TButton;
     cbRandomize: TCheckBox;
-    cgProtectedSet: TCheckGroup;
     gbAnswers: TGroupBox;
     gbExhibit: TGroupBox;
     gbNavigation: TGroupBox;
@@ -122,7 +121,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure cbProtectedSetClick(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
   private
     fQSetRef: TQuestionSet;                                                           
@@ -163,10 +161,10 @@ var
 
 procedure TAddEditForm.FormCreate(Sender: TObject);
 begin
-  Left := AppCfg.ReadInteger(SECT_CFG, INI_WDW_LEFT, 40);
-  Top := AppCfg.ReadInteger(SECT_CFG, INI_WDW_TOP, 40);
-  Width := AppCfg.ReadInteger(SECT_CFG, INI_WDW_WIDTH, 0);
-  Height := AppCfg.ReadInteger(SECT_CFG, INI_WDW_HEIGHT, 0);
+  Left := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_LEFT, 40);
+  Top := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_TOP, 40);
+  Width := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_WIDTH, 0);
+  Height := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_HEIGHT, 0);
   //
   SearchForm := TSearchForm.Create(self);
   ImageLoaded := '';
@@ -185,7 +183,6 @@ begin
   // Font.Size := AppFontSize;    { Keep smaller size for editing }
   ShowHint := AppShowHint;
   Caption := 'TestMaster - Add / Edit Questions [' + AppQFilename + ']';
-  cgProtectedSet.Checked[0] := fQSetRef.IsProtectedSet;
   UpdatingFlag := False;
   fDataChanged := False;
   SetEdit(tsView);
@@ -205,16 +202,7 @@ end;
 
 procedure TAddEditForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  if (btnClose.Enabled) then
-    begin
-      if (fDataChanged) then
-        begin
-          // QSet saved on return to MainForm
-          fQSetRef.IsProtectedSet := cgProtectedSet.Checked[0];
-          // QSet.RegisteredID := StrToInt(Encode(AboutBox.RegName + '0'));
-        end;
-    end
-  else
+  if (not btnClose.Enabled) then
     begin
       MessageWarning('Cannot close window', 'You must Save or Cancel edit before closing window');
       CloseAction := caNone;
@@ -228,10 +216,10 @@ procedure TAddEditForm.FormDestroy(Sender: TObject);
 begin
   SearchForm.Free;
   //
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_LEFT, Left);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_TOP, Top);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_WIDTH, Width);
-  AppCfg.WriteInteger(SECT_CFG, INI_WDW_HEIGHT, Height);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_LEFT, Left);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_TOP, Top);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_WIDTH, Width);
+  AppCfg.WriteInteger(SECT_CFG, CFG_WDW_HEIGHT, Height);
 end;       
 
 
@@ -303,7 +291,8 @@ end;
 { SHOW EXHIBIT }
 
 procedure TAddEditForm.ShowExhibit;
-begin
+begin                             
+  panelExhibit.Color := clWhite;
   if (localExhibit <> '') then          // Update image, if there is one
     begin
       btnExhibitShow.Enabled   := ShowImage;
@@ -327,23 +316,21 @@ var
   ImageFound: boolean;
 begin
   ThisFilename := AppTempDirectory + localExhibit;
-  ImageFound := False;
-  if (ThisFilename <> ImageLoaded) then // Image not loaded already?
-    begin
-      ImageFound := LoadImage(imgExhibit, ThisFilename);
-      ImageLoaded := ThisFilename;
-    end;
+  //ImageFound := False;
+  //if (ThisFilename <> ImageLoaded) then // Image not loaded already?
+    ImageFound := LoadImage(imgExhibit, ThisFilename);
 
   if (ImageFound) then
     begin
+      //ImageLoaded := ThisFilename;
       FitImage(imgExhibit);          
-      panelExhibit.Color := clWhite;
+      //panelExhibit.Color := clWhite;
       panelExhibit.Caption := '';
     end
   else
     begin                       
       imgExhibit.Picture.Clear;
-      panelExhibit.Color := clYellow;
+      panelExhibit.Color := clYellow;   // Highlight missing file
       btnExhibitShow.Enabled := False;
       panelExhibit.Caption := 'Exhibit not found: ' + CRLF + localExhibit;
     end;
@@ -576,14 +563,6 @@ procedure TAddEditForm.btnFindClick(Sender: TObject);
 begin
   SearchForm.Show;                      // Non modal so can select edit window
 end;   
-
-
-{ PROTECTED ONCLICK }
-
-procedure TAddEditForm.cbProtectedSetClick(Sender: TObject);
-begin
-  fDataChanged := (fQSetRef.IsProtectedSet <> cgProtectedSet.Checked[0]);
-end;  
 
 
 { BUTTON HELP }

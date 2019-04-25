@@ -35,6 +35,9 @@ uses
   LCLIntf, Forms, Classes, SysUtils, Dialogs, Controls, StdCtrls, ExtCtrls,
   Zipper, FileUtil, LazFileUtils, LbCipher, LbString, LbUtils;
 
+type
+  TAppDataID = (adGlobal, adUser);
+
 const
   {$ifdef darwin}
     DIRECTORY_SEPARATOR = '/';
@@ -56,7 +59,7 @@ var
   // Global routines
   function  GetAppDirectory: string;
   function  GetAppTestsDirectory: string;    
-  function  GetAppDataDirectory: string;
+  function  GetAppDataDirectory(id: TAppDataID): string;
   function  GetAppTempDirectory: string;
   function  MessageQuery(aCaption, aText: string): boolean;
   procedure MessageWarning(aCaption, aText: string);
@@ -73,34 +76,56 @@ var
 
 implementation
 
-{ GET FOLDER PATHS / DIRECTORIES }
+{ GET FOLDER / DIRECTORY PATHS }
+
+{ Apple advise should not write to Application bundle as might not have
+  permission to do so. Can read Application resources from the bundle though.
+  Used for Help files and logo }
 
 function GetAppDirectory: string;
 begin
-  Result := ExtractFilePath(Application.ExeName);
+  {$ifdef darwin}
+    Result := ExtractFileDir(ExtractFileDir(Application.ExeName)) + '/Resources/';
+  {$endif}
+  {$ifdef windows}
+    Result := ExtractFilePath(Application.ExeName)
+  {$endif}
 end;
 
 
 function GetAppTestsDirectory: string;
 begin
-  Result := GetAppDataDirectory + 'Tests' + DIRECTORY_SEPARATOR;
+  Result := GetAppDataDirectory(adGlobal) + 'Tests' + DIRECTORY_SEPARATOR;
 end;
 
 
-function GetAppDataDirectory: string;
+{ Wanted to put global app data in "/Library/Application Support" as advised by
+  some Apple documentation, but no write privileges in High Sierra so used
+  user's Application Support folder }
+
+function GetAppDataDirectory(id: TAppDataID): string;
 var
   AppName: string;
 begin
   AppName := ExtractFilename(Application.ExeName);
   Result := '/usr/share/' + AppName + '/';
   {$ifdef darwin}
-    Result := ExpandFileName('~/Library/Application Support/') + AppName + '/';
+    if (id = adUser) then
+      Result := ExpandFileName('~/Library/Application Support/') + AppName + '/'
+    else
+      // adGlobal
+      Result := ExpandFileName('~/Library/Application Support/') + AppName + '/';
   {$endif}
   {$ifdef windows}
-    Result := ExtractFilePath(Application.ExeName); { TODO : Find relevant folder for Windows }
+    Result := ExtractFilePath(Application.ExeName);
+    // Or perhaps...
+    // Result := GetEnvironmentVariableUTF8('appdata')+ '\' + AppName;
   {$endif}
 end;
 
+
+{ Create a temporary directory for unzipping the contents of a TMQZ file. It
+  simply increments a folder name until the folder does not exist, and uses that }
 
 function GetAppTempDirectory: string;
 var
@@ -108,7 +133,7 @@ var
   prefix: string;
 begin
   i := 0;
-  prefix := GetAppDataDirectory + 'tmp';
+  prefix := GetAppDataDirectory(adUser) + 'tmp';
   repeat
     Result := Format('%s%.5d', [prefix, i]);
     Inc(i);
@@ -118,7 +143,7 @@ begin
 end;
 
 
-{ QUERY MESSAGE }
+{ COMMON MESSAGE HELPERS }
 
 function MessageQuery(aCaption, aText: string): boolean;
 begin
@@ -126,15 +151,11 @@ begin
 end;
 
 
-{ WARNING MESSAGE }
-
 procedure MessageWarning(aCaption, aText: string);
 begin
   MessageDlg(aCaption, aText, mtWarning, [mbOK], 0);;
 end;
 
-
-{ INFO MESSAGE }
 
 procedure MessageInfo(aText: string);
 begin
@@ -220,8 +241,9 @@ begin
 end;
 *)
 
-{ SWAP BUTTONS - assumes buttons set for MacOS, this will reverse them for the
-                 common look on Windows }
+
+{ SWAP BUTTONS - assumes button order set ok for MacOS, this will reverse them
+                 for the common look on Windows }
 
 procedure SwapButtons(aButt1, aButt2: TButton);
 {$ifdef windows}
@@ -261,7 +283,7 @@ begin
 end;           
 
 
-{  UNZIP Q FILES  }
+{ UNZIP Q FILES }
 
 { Unzip all files in the TMQZ archive into the temporary directory, returning
   True if all ok, or False if there are any issues opening the ZIP file }
@@ -302,7 +324,7 @@ begin
 end;
 
 
-{  ZIP Q FILES  }
+{ ZIP Q FILES }
 
 { Zip all the files in the temporary directory with relative path names,
   returning True if all ok, or False if there are any issues in doing so

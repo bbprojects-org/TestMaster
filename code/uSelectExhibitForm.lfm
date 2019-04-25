@@ -16,7 +16,7 @@ object ExhibitManager: TExhibitManager
   OnDestroy = FormDestroy
   OnResize = FormResize
   OnShow = FormShow
-  LCLVersion = '2.0.1.0'
+  LCLVersion = '2.0.3.0'
   object btnSelect: TButton
     Left = 522
     Height = 20
@@ -27,7 +27,7 @@ object ExhibitManager: TExhibitManager
     Caption = 'Select'
     Default = True
     ModalResult = 1
-    TabOrder = 0
+    TabOrder = 3
   end
   object btnCancel: TButton
     Left = 454
@@ -38,7 +38,7 @@ object ExhibitManager: TExhibitManager
     Anchors = [akRight, akBottom]
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 1
+    TabOrder = 4
   end
   object gbFileList: TGroupBox
     Left = 8
@@ -49,12 +49,12 @@ object ExhibitManager: TExhibitManager
     BorderSpacing.Bottom = 32
     BorderSpacing.Around = 8
     Caption = 'Image Files:'
-    ClientHeight = 329
+    ClientHeight = 334
     ClientWidth = 208
-    TabOrder = 2
+    TabOrder = 0
     object FileListBox1: TFileListBox
       Left = 4
-      Height = 321
+      Height = 326
       Hint = 'Select the relevant file (image is previewed)'
       Top = 4
       Width = 200
@@ -77,12 +77,12 @@ object ExhibitManager: TExhibitManager
     BorderSpacing.Bottom = 32
     BorderSpacing.Around = 8
     Caption = 'Image:'
-    ClientHeight = 329
+    ClientHeight = 334
     ClientWidth = 352
-    TabOrder = 3
+    TabOrder = 1
     object Image1: TImage
       Left = 4
-      Height = 321
+      Height = 326
       Hint = 'Image preview window'
       Top = 4
       Width = 344
@@ -102,7 +102,7 @@ object ExhibitManager: TExhibitManager
     ClientWidth = 312
     Color = clYellow
     ParentColor = False
-    TabOrder = 4
+    TabOrder = 2
     object lblWarning: TLabel
       Left = 12
       Height = 118

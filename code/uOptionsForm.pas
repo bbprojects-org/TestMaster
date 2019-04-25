@@ -93,6 +93,8 @@ uses
 
 {$R *.lfm}
 
+{ SHOW }
+
 procedure TAdminOptions.FormShow(Sender: TObject);
 begin
   SwapButtons(btnCancel, btnOk);
@@ -101,30 +103,17 @@ begin
 end;
 
 
+{ BUTTON SCREEN COLOUR }
+
 procedure TAdminOptions.btnScreenColorClick(Sender: TObject);
 begin
   ColorDialog1.Color := panelColour.Color;
   ColorDialog1.Execute;
   panelColour.Color := ColorDialog1.Color;
-end;
+end;  
 
 
-procedure TAdminOptions.btnDefaultClick(Sender: TObject);
-begin
-  cbEnableAnswers.Checked := True;
-  cbEnableClearResults.Checked := False;
-  cbAllowEdits.Checked := False;
-  cbDeletePermitted.Checked := False;
-  cbEnableRunningScore.Checked := True;
-  panelColour.Color := clDefault;
-end;
-
-
-procedure TAdminOptions.cbAllowEditsClick(Sender: TObject);
-begin
-  cbDeletePermitted.Enabled := cbAllowEdits.Checked;
-end;
-
+{ BUTTON CHANGE PASSWORD }
 
 procedure TAdminOptions.btnChangePasswordClick(Sender: TObject);
 var
@@ -140,7 +129,26 @@ begin
 end;
 
 
+{ BUTTON DEFAULT }
+
+procedure TAdminOptions.btnDefaultClick(Sender: TObject);
+begin
+  cbEnableAnswers.Checked := False;
+  cbEnableClearResults.Checked := False;
+  cbAllowEdits.Checked := False;
+  cbDeletePermitted.Checked := False;
+  cbEnableRunningScore.Checked := False;
+  panelColour.Color := clDefault;
+end;
+
+
 { GET / SET PROPERTY VALUES }
+
+procedure TAdminOptions.cbAllowEditsClick(Sender: TObject);
+begin
+  cbDeletePermitted.Enabled := cbAllowEdits.Checked;
+end;
+
 
 function TAdminOptions.GetAnswersEnabled: boolean;
 begin

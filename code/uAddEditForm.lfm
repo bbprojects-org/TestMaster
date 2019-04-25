@@ -17,7 +17,7 @@ object AddEditForm: TAddEditForm
   OnShow = FormShow
   ParentFont = True
   ShowHint = True
-  LCLVersion = '2.0.1.0'
+  LCLVersion = '2.0.3.0'
   object panelButtons: TPanel
     Left = 680
     Height = 600
@@ -31,7 +31,7 @@ object AddEditForm: TAddEditForm
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 1
     object rgAnswerType: TRadioGroup
       Left = 8
       Height = 60
@@ -47,7 +47,7 @@ object AddEditForm: TAddEditForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 37
+      ClientHeight = 42
       ClientWidth = 96
       Font.Color = clWindowText
       Font.Height = -11
@@ -59,32 +59,7 @@ object AddEditForm: TAddEditForm
       )
       OnClick = rgAnswerTypeClick
       ParentFont = False
-      TabOrder = 0
-    end
-    object cgProtectedSet: TCheckGroup
-      Left = 8
-      Height = 40
-      Top = 472
-      Width = 104
-      AutoFill = True
-      Caption = 'Module:'
-      ChildSizing.LeftRightSpacing = 6
-      ChildSizing.TopBottomSpacing = 6
-      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-      ChildSizing.EnlargeVertical = crsHomogenousChildResize
-      ChildSizing.ShrinkHorizontal = crsScaleChilds
-      ChildSizing.ShrinkVertical = crsScaleChilds
-      ChildSizing.Layout = cclLeftToRightThenTopToBottom
-      ChildSizing.ControlsPerLine = 1
-      ClientHeight = 17
-      ClientWidth = 96
-      Items.Strings = (
-        'Protected'
-      )
       TabOrder = 3
-      Data = {
-        0100000002
-      }
     end
     object btnClose: TButton
       Left = 16
@@ -95,7 +70,7 @@ object AddEditForm: TAddEditForm
       Anchors = [akRight, akBottom]
       Caption = 'Close'
       OnClick = btnCloseClick
-      TabOrder = 1
+      TabOrder = 5
     end
     object btnHelp: TButton
       Left = 16
@@ -105,7 +80,7 @@ object AddEditForm: TAddEditForm
       Anchors = [akRight, akBottom]
       Caption = 'Help'
       OnClick = btnHelpClick
-      TabOrder = 2
+      TabOrder = 4
     end
     object gbQuestionNumber: TGroupBox
       Left = 8
@@ -115,12 +90,12 @@ object AddEditForm: TAddEditForm
       Align = alTop
       BorderSpacing.Around = 8
       Caption = 'Question #'
-      ClientHeight = 47
+      ClientHeight = 52
       ClientWidth = 96
-      TabOrder = 4
+      TabOrder = 0
       object lblQuestionNumber: TLabel
         Left = 0
-        Height = 47
+        Height = 52
         Top = 0
         Width = 96
         Align = alClient
@@ -150,9 +125,9 @@ object AddEditForm: TAddEditForm
       Top = 240
       Width = 104
       Caption = 'Navigation:'
-      ClientHeight = 129
+      ClientHeight = 134
       ClientWidth = 96
-      TabOrder = 5
+      TabOrder = 2
       object btnFind: TButton
         Left = 8
         Height = 20
@@ -162,11 +137,12 @@ object AddEditForm: TAddEditForm
         Caption = 'Find'
         OnClick = btnFindClick
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 4
       end
       object btnPrev: TButton
         Left = 8
         Height = 20
+        Hint = 'Go to the previous question in this set'
         Top = 28
         Width = 80
         Caption = 'Previous'
@@ -177,32 +153,35 @@ object AddEditForm: TAddEditForm
       object btnFirst: TButton
         Left = 8
         Height = 20
+        Hint = 'Go to the first question in this set'
         Top = 4
         Width = 80
         Caption = 'First'
         OnClick = btnFirstClick
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 0
       end
       object btnNext: TButton
         Left = 8
         Height = 20
+        Hint = 'Go to the next question in this set'
         Top = 52
         Width = 80
         Caption = 'Next'
         OnClick = btnNextClick
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
       object btnLast: TButton
         Left = 8
         Height = 20
+        Hint = 'Go to the last question in this set'
         Top = 76
         Width = 80
         Caption = 'Last'
         OnClick = btnLastClick
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
       end
     end
     object gbAddEtc: TGroupBox
@@ -211,9 +190,9 @@ object AddEditForm: TAddEditForm
       Top = 112
       Width = 104
       Caption = 'Question:'
-      ClientHeight = 101
+      ClientHeight = 106
       ClientWidth = 96
-      TabOrder = 6
+      TabOrder = 1
       object btnAdd: TButton
         Left = 9
         Height = 20
@@ -265,7 +244,7 @@ object AddEditForm: TAddEditForm
     BevelOuter = bvNone
     ClientHeight = 600
     ClientWidth = 680
-    TabOrder = 1
+    TabOrder = 0
     object panelTop: TPanel
       Left = 8
       Height = 198
@@ -284,12 +263,12 @@ object AddEditForm: TAddEditForm
         Width = 425
         Align = alClient
         Caption = 'Question:'
-        ClientHeight = 176
+        ClientHeight = 180
         ClientWidth = 417
         TabOrder = 0
         object memoQuestion: TMemo
           Left = 4
-          Height = 168
+          Height = 172
           Hint = 'Enter the question in this box'
           Top = 4
           Width = 409
@@ -311,12 +290,12 @@ object AddEditForm: TAddEditForm
         Align = alRight
         BorderSpacing.Left = 8
         Caption = 'Exhibit:'
-        ClientHeight = 176
+        ClientHeight = 180
         ClientWidth = 223
         TabOrder = 1
         object panelExhibit: TPanel
           Left = 4
-          Height = 168
+          Height = 172
           Top = 4
           Width = 138
           Align = alClient
@@ -327,7 +306,7 @@ object AddEditForm: TAddEditForm
           BevelOuter = bvNone
           BorderStyle = bsSingle
           Caption = 'No Exhibit'
-          ClientHeight = 168
+          ClientHeight = 172
           ClientWidth = 138
           Color = clWhite
           ParentColor = False
@@ -336,7 +315,7 @@ object AddEditForm: TAddEditForm
           Wordwrap = True
           object imgExhibit: TImage
             Left = 4
-            Height = 160
+            Height = 164
             Hint = 'This is the exhibit which will be displayed for this question'
             Top = 4
             Width = 130
@@ -379,7 +358,7 @@ object AddEditForm: TAddEditForm
         object btnExhibitShow: TButton
           Left = 150
           Height = 20
-          Hint = 'Display the exhibit full size'
+          Hint = 'Display the exhibit full size in a window'
           Top = 120
           Width = 70
           Anchors = [akTop, akRight]
@@ -416,23 +395,23 @@ object AddEditForm: TAddEditForm
       Align = alBottom
       BorderSpacing.Around = 8
       Caption = 'Possible Answers:'
-      ClientHeight = 188
+      ClientHeight = 192
       ClientWidth = 656
       TabOrder = 1
       object ScrollBox1: TScrollBox
         Left = 4
-        Height = 180
+        Height = 184
         Hint = 'Answers to choose from'
         Top = 4
         Width = 648
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Page = 180
+        VertScrollBar.Page = 182
         VertScrollBar.Tracking = True
         Align = alClient
         BorderSpacing.Around = 4
-        ClientHeight = 180
-        ClientWidth = 633
+        ClientHeight = 182
+        ClientWidth = 631
         TabOrder = 1
         object SpeedButton1: TSpeedButton
           Tag = 1
@@ -558,6 +537,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 0
+          TabStop = False
         end
         object memoOption2: TMemo
           Left = 44
@@ -570,6 +550,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 1
+          TabStop = False
         end
         object memoOption3: TMemo
           Left = 44
@@ -582,6 +563,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 2
+          TabStop = False
         end
         object memoOption4: TMemo
           Left = 44
@@ -594,6 +576,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 3
+          TabStop = False
         end
         object memoOption5: TMemo
           Left = 44
@@ -606,6 +589,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 4
+          TabStop = False
         end
         object memoOption6: TMemo
           Left = 44
@@ -618,6 +602,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 5
+          TabStop = False
         end
         object memoOption7: TMemo
           Left = 44
@@ -630,6 +615,7 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 6
+          TabStop = False
         end
         object memoOption8: TMemo
           Left = 44
@@ -642,14 +628,15 @@ object AddEditForm: TAddEditForm
           OnChange = memoQuestionChange
           ScrollBars = ssVertical
           TabOrder = 7
+          TabStop = False
         end
       end
       object cbRandomize: TCheckBox
-        Left = 520
+        Left = 531
         Height = 18
         Hint = 'If checked, answers will be displayed in random order'
         Top = 6
-        Width = 91
+        Width = 80
         Anchors = [akTop, akRight]
         Caption = 'Randomize'
         Checked = True
@@ -670,12 +657,12 @@ object AddEditForm: TAddEditForm
       Align = alBottom
       BorderSpacing.Around = 8
       Caption = 'Reference / Comment:'
-      ClientHeight = 138
+      ClientHeight = 142
       ClientWidth = 656
       TabOrder = 2
       object memoRemarks: TMemo
         Left = 4
-        Height = 130
+        Height = 134
         Hint = 'Enter any remarks / comments in this box'
         Top = 4
         Width = 648

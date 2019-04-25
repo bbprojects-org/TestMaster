@@ -1,3 +1,0 @@
-https://github.com/jarto/lockbox2
-
-Some files deleted where not required for Lazarus/FPC

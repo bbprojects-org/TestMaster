@@ -26,12 +26,6 @@ unit uQuestionSet;
 
 {$mode objfpc}{$h+}
 
-{ Changes introduced in Version 2.02
-  - added QSetID       unique ID for each question set, based on time created
-          RegID        this should equate to current UserRegID if file protected
-          ProtectFlag  indicates whether question set protected or not
-}
-
 interface
 
 uses
@@ -64,8 +58,6 @@ type
     fQSet: array [0..250] of TQuestion;
     fCurrentIndex: integer;
     fMaxInSet: integer;  { Number of questions: 0 = empty (summary only), -1 = no question set loaded  }
-    fProtectFlag: boolean;                                                                                  
-    fAdminID: string;
     procedure WriteStr(Stream: TFileStream; Value: string);
     procedure ReadStr(Stream: TFileStream; out Value: string);
     function  GetQuestion: TQuestion;
@@ -84,8 +76,6 @@ type
     property  CurrentIndex: integer read fCurrentIndex write SetIndex;
     property  LastIndex: integer read fMaxInSet write SetLastIndex;
     property  CurrentQuestion: TQuestion read GetQuestion;
-    property  IsProtectedSet: boolean read fProtectFlag write fProtectFlag;
-    property  ID: string read fAdminID;
   end;
 
 
@@ -101,8 +91,6 @@ begin
   inherited Create;
   fMaxInSet := -1;                      // No question set loaded
   fCurrentIndex := 0;
-  fProtectFlag := True;
-  fAdminID :=  'DEFAULT_ADMINISTRATOR'; (* TO BE REPLACED *)
 end;
 
 
@@ -116,14 +104,14 @@ end;
 
 procedure TQuestionSet.SetIndex(Value: Integer);
 begin
-  if (Value >= 0) and (Value <= fMaxInSet) then
+  if ( (Value >= 0) and (Value <= fMaxInSet) ) then
     fCurrentIndex := Value;
 end;
 
 
 procedure TQuestionSet.SetLastIndex(Value: Integer);
 begin
-  if (Value >= 0) and (Value <= 250) then
+  if ( (Value >= 0) and (Value <= 250) ) then
     fMaxInset := Value;
 end;
 
@@ -156,7 +144,7 @@ var
   i: Integer;
 begin
   // If more than one entry, then copy entries down. If only one then
-  // set MaInset = 0, i.e. an empty set. Do not permit summary being deleted
+  // set fMaxInset = 0, i.e. an empty set. Do not permit summary to be deleted
   if (fMaxInSet > 1) then
     begin
       for i := fCurrentIndex to (fMaxInSet - 1) do
@@ -210,9 +198,8 @@ begin
     begin
       Stream := TFileStream.Create(Filename, fmCreate);
       try
-        WriteStr(Stream, TMQ_VER);      // Version identifier       
-        Stream.Write(fProtectFlag, SizeOf(Boolean));
-        WriteStr(Stream, fAdminID);     // If protected, use this
+        // Write version identifier
+        WriteStr(Stream, TMQ_VER);
         // Write the questions
         Stream.Write(fMaxInSet, sizeof(Integer));
         for i := 0 to fMaxInSet do
@@ -269,8 +256,6 @@ begin
     if (Ver <> TMQ_VER) then Exit;      // Cannot load if incompatible
 
     Result := True;                     // Version ok
-    Stream.Read(fProtectFlag, SizeOf(Boolean));
-    ReadStr(Stream, fAdminID);
     // Read question set
     Stream.Read(fMaxInSet, sizeof(Integer));
     for i := 0 to fMaxInSet do
@@ -303,7 +288,7 @@ begin
   Stream.Read(ThisLength{%H-}, sizeof(Integer)); // Get length of string
   SetLength(Value, ThisLength);
   Stream.Read(Value[1], ThisLength);             // Read the encrypted string
-  (* Value := Decrypt(Value); *)
+  // Value := Decrypt(Value);
 end;
 
 

@@ -27,7 +27,7 @@ object RunTestForm: TRunTestForm
     ClientWidth = 700
     Color = clYellow
     ParentColor = False
-    TabOrder = 2
+    TabOrder = 0
     object lbTitle: TLabel
       Left = 6
       Height = 18
@@ -90,22 +90,6 @@ object RunTestForm: TRunTestForm
       TabOrder = 1
       TabStop = False
     end
-    object lblDebug1: TLabel
-      Left = 200
-      Height = 16
-      Top = 11
-      Width = 60
-      Caption = 'lblDebug1'
-      ParentColor = False
-    end
-    object lblDebug2: TLabel
-      Left = 200
-      Height = 16
-      Top = 28
-      Width = 62
-      Caption = 'lblDebug2'
-      ParentColor = False
-    end
   end
   object ScrollBox1: TScrollBox
     Left = 0
@@ -121,7 +105,7 @@ object RunTestForm: TRunTestForm
     ClientWidth = 618
     Color = clBtnFace
     ParentColor = False
-    TabOrder = 0
+    TabOrder = 1
     object lblQuestion: TLabel
       Left = 16
       Height = 16
@@ -440,6 +424,7 @@ object RunTestForm: TRunTestForm
       Top = 256
       Width = 22
       TabOrder = 9
+      TabStop = True
       Visible = False
     end
     object rb2: TRadioButton
@@ -449,6 +434,7 @@ object RunTestForm: TRunTestForm
       Top = 272
       Width = 22
       TabOrder = 10
+      TabStop = True
       Visible = False
     end
     object rb3: TRadioButton
@@ -458,6 +444,7 @@ object RunTestForm: TRunTestForm
       Top = 288
       Width = 22
       TabOrder = 11
+      TabStop = True
       Visible = False
     end
     object rb4: TRadioButton
@@ -467,6 +454,7 @@ object RunTestForm: TRunTestForm
       Top = 304
       Width = 22
       TabOrder = 12
+      TabStop = True
       Visible = False
     end
     object rb5: TRadioButton
@@ -476,6 +464,7 @@ object RunTestForm: TRunTestForm
       Top = 320
       Width = 22
       TabOrder = 13
+      TabStop = True
       Visible = False
     end
     object rb6: TRadioButton
@@ -485,6 +474,7 @@ object RunTestForm: TRunTestForm
       Top = 336
       Width = 22
       TabOrder = 14
+      TabStop = True
       Visible = False
     end
     object rb7: TRadioButton
@@ -494,6 +484,7 @@ object RunTestForm: TRunTestForm
       Top = 352
       Width = 22
       TabOrder = 15
+      TabStop = True
       Visible = False
     end
     object rb8: TRadioButton
@@ -503,6 +494,7 @@ object RunTestForm: TRunTestForm
       Top = 368
       Width = 22
       TabOrder = 16
+      TabStop = True
       Visible = False
     end
     object Line2: TPanel
@@ -573,7 +565,7 @@ object RunTestForm: TRunTestForm
     BevelOuter = bvNone
     ClientHeight = 29
     ClientWidth = 700
-    TabOrder = 1
+    TabOrder = 2
     object lblResults: TLabel
       Left = 302
       Height = 16
@@ -594,8 +586,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnNextClick
       ParentFont = False
-      TabOrder = 0
-      TabStop = False
+      TabOrder = 1
     end
     object btnPrevious: TButton
       Left = 6
@@ -609,8 +600,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnPreviousClick
       ParentFont = False
-      TabOrder = 1
-      TabStop = False
+      TabOrder = 0
     end
     object btnEndReview: TButton
       Left = 228
@@ -624,8 +614,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnEndReviewClick
       ParentFont = False
-      TabOrder = 2
-      TabStop = False
+      TabOrder = 3
     end
     object btnClose: TButton
       Left = 620
@@ -641,8 +630,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnCloseClick
       ParentFont = False
-      TabOrder = 3
-      TabStop = False
+      TabOrder = 6
     end
     object btnSave: TButton
       Left = 517
@@ -658,8 +646,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnSaveClick
       ParentFont = False
-      TabOrder = 4
-      TabStop = False
+      TabOrder = 5
     end
     object btnHelp: TButton
       Left = 444
@@ -673,8 +660,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnHelpClick
       ParentFont = False
-      TabOrder = 5
-      TabStop = False
+      TabOrder = 4
     end
     object btnAnswer: TButton
       Left = 152
@@ -688,8 +674,7 @@ object RunTestForm: TRunTestForm
       Font.Name = 'MS Sans Serif'
       OnClick = btnAnswerClick
       ParentFont = False
-      TabOrder = 6
-      TabStop = False
+      TabOrder = 2
     end
   end
   object ListBox1: TListBox
@@ -703,6 +688,7 @@ object RunTestForm: TRunTestForm
     OnDblClick = ListBox1DblClick
     Options = []
     TabOrder = 3
+    TabStop = False
     Visible = False
   end
   object TestTimer: TTimer

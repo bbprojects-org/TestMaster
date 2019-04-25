@@ -50,8 +50,6 @@ type
   { TRunTestForm }
 
   TRunTestForm = class(TForm)
-    lblDebug1: TLabel;
-    lblDebug2: TLabel;
     panelExhibit: TPanel;
     TestTimer: TTimer;
     panelButtons: TPanel;
@@ -145,9 +143,9 @@ type
     OldNext, OldPrev, OldEnd, OldClose: boolean;
     MaxNumber: integer;
     CurrentQuestion: integer;
-    CheckArray: array [1..250] of TCheck;
-    QuestionOrder: array [1..250] of byte;
-    AnswerOrder: array [1..250, 1..8] of byte;
+    CheckArray: array[1..250] of TCheck;
+    QuestionOrder: array[1..250] of byte;
+    AnswerOrder: array[1..250, 1..8] of byte;
     ReviewFlag: boolean;
     AnswerFlag: boolean;
     ErrorsFlag: boolean;
@@ -192,12 +190,12 @@ const
 
 procedure TRunTestForm.FormCreate(Sender: TObject);
 begin
-  Left := AppCfg.Readinteger(SECT_CFG, INI_WDW_LEFT, 40);
-  Top := AppCfg.Readinteger(SECT_CFG, INI_WDW_TOP, 40);
-  Width := AppCfg.Readinteger(SECT_CFG, INI_WDW_WIDTH, 0);
-  Height := AppCfg.Readinteger(SECT_CFG, INI_WDW_HEIGHT, 0);
+  Left := AppCfg.Readinteger(SECT_CFG, CFG_WDW_LEFT, 40);
+  Top := AppCfg.Readinteger(SECT_CFG, CFG_WDW_TOP, 40);
+  Width := AppCfg.Readinteger(SECT_CFG, CFG_WDW_WIDTH, 0);
+  Height := AppCfg.Readinteger(SECT_CFG, CFG_WDW_HEIGHT, 0);
   //
-  fQSetRef := nil;                      (* TODO : Check if these not set externally, form still works ok *)
+  fQSetRef := nil;                      { TODO : Check if these not set externally, form still works ok }
   fMainFormLogoRef := nil;
   fFilename := '';
   fIsElapsedTime := True;
@@ -208,10 +206,10 @@ end;
 
 procedure TRunTestForm.FormDestroy(Sender: TObject);
 begin  
-  AppCfg.Writeinteger(SECT_CFG, INI_WDW_LEFT, Left);
-  AppCfg.Writeinteger(SECT_CFG, INI_WDW_TOP, Top);
-  AppCfg.Writeinteger(SECT_CFG, INI_WDW_WIDTH, Width);
-  AppCfg.Writeinteger(SECT_CFG, INI_WDW_HEIGHT, Height);
+  AppCfg.Writeinteger(SECT_CFG, CFG_WDW_LEFT, Left);
+  AppCfg.Writeinteger(SECT_CFG, CFG_WDW_TOP, Top);
+  AppCfg.Writeinteger(SECT_CFG, CFG_WDW_WIDTH, Width);
+  AppCfg.Writeinteger(SECT_CFG, CFG_WDW_HEIGHT, Height);
 end;
 
 
@@ -228,24 +226,16 @@ begin
   // 
   Font.Size := AppFontSize;
   ShowHint := AppShowHint;
-  (* DEBUG *)
-  //SetFontAndHints;
-  lblDebug1.Caption := IntToStr(cbl1.Font.Size);
-  if (btnNext.ShowHint) then
-    lblDebug2.Caption := 'True'
-  else
-    lblDebug2.Caption := 'False';
-  (* DEBUG END *)
 
   panelTop.Color := LogoImage.Picture.Bitmap.Canvas.Pixels[0,0]; // Colour match to left of logo
 
   Caption := 'TestMaster [' + fFilename + ']';
   ListBox1.Visible := False;
   // Initial button states set in designer; btnNext/btnPrevious set by SetQuestion below
-  IsClosePressed      := False;         // Used to trap [X] close button
-  lblResults.Caption    := '';
-  ReviewFlag           := False;
-  AnswerFlag           := False;
+  IsClosePressed     := False;          // Used to trap [X] close button
+  lblResults.Caption := '';
+  ReviewFlag         := False;
+  AnswerFlag         := False;
   fQSetRef.CurrentIndex := 0;
   RandomOrder := ((fQSetRef.CurrentQuestion.Answer and 1) = 1);
   MaxNumber := fQSetRef.LastIndex;
@@ -839,24 +829,13 @@ end;
 { BUTTON SAVE }
 
 procedure TRunTestForm.btnSaveClick(Sender: TObject);
-var
-  ErrorString: string;
-  i: integer;
 begin
   btnSave.Enabled := False;
   if (not fIsElapsedTime) then
     TestTime := (AppTimer * 60) - TestTime;
   ResultsForm.Add(FormatDateTime('dd mmm yyyy', Date) + '  Test: ' + fFilename);
   ResultsForm.Add('             Time: ' + ShowTime(TestTime));
-  ErrorString := '';
-  if (ErrorsFlag) then                  // If there were errors, list them
-    begin
-      ErrorString := 'Incorrect:';
-      for i := 1 to fQSetRef.LastIndex do // Write out numbers
-        if (CheckArray[i].Correct = False) then
-          ErrorString := ErrorString + ' #' + IntToStr(i);
-    end;
-  ResultsForm.Add('             ' + lblResults.Caption + '  ' + ErrorString);
+  ResultsForm.Add('             ' + lblResults.Caption);
   ResultsForm.Add('');
 end;
 

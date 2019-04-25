@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 3224
+  Left = 3081
   Height = 400
-  Top = 172
+  Top = 158
   Width = 600
   AllowDropFiles = True
   BorderIcons = [biSystemMenu, biMinimize]
@@ -22,7 +22,7 @@ object MainForm: TMainForm
   OnResize = FormResize
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '2.0.1.0'
+  LCLVersion = '2.0.3.0'
   object FileListBox1: TFileListBox
     Left = 8
     Height = 348
@@ -77,9 +77,11 @@ object MainForm: TMainForm
         Align = alClient
         BorderSpacing.Around = 6
         BorderStyle = bsNone
+        Lines.Strings = (        )
         ParentColor = True
         ReadOnly = True
         TabOrder = 0
+        TabStop = False
       end
     end
     object panelLogo: TPanel
@@ -118,7 +120,7 @@ object MainForm: TMainForm
     Font.Name = 'MS Sans Serif'
     OnClick = btnEditClick
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 3
   end
   object btnStart: TButton
     Left = 16
@@ -133,7 +135,7 @@ object MainForm: TMainForm
     Font.Name = 'MS Sans Serif'
     OnClick = btnStartClick
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
   end
   object btnExit: TButton
     Left = 522
@@ -148,7 +150,7 @@ object MainForm: TMainForm
     Font.Name = 'MS Sans Serif'
     OnClick = btnExitClick
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 7
   end
   object btnAdd: TButton
     Left = 168
@@ -163,7 +165,7 @@ object MainForm: TMainForm
     Font.Name = 'MS Sans Serif'
     OnClick = btnAddClick
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 4
   end
   object btnDelete: TButton
     Left = 236
@@ -178,7 +180,7 @@ object MainForm: TMainForm
     Font.Name = 'MS Sans Serif'
     OnClick = btnDeleteClick
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 5
   end
   object btnHelp: TButton
     Left = 454
@@ -192,17 +194,17 @@ object MainForm: TMainForm
     Font.Name = 'MS Sans Serif'
     OnClick = btnHelpClick
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
   end
-  object Label2: TLabel
+  object lblDropHelp: TLabel
     Left = 304
     Height = 32
-    Top = 360
-    Width = 70
+    Top = 362
+    Width = 104
     Alignment = taCenter
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'Drop a TMQZ to add to list'
+    Caption = 'Drop a TMQZ on this form to add to list'
     Font.Height = -9
     Layout = tlCenter
     ParentColor = False
@@ -306,32 +308,5 @@ object MainForm: TMainForm
         OnClick = menuAboutWindowsClick
       end
     end
-  end
-  object ColorDialog1: TColorDialog
-    Color = clBtnFace
-    CustomColors.Strings = (
-      'ColorA=000000'
-      'ColorB=000080'
-      'ColorC=008000'
-      'ColorD=008080'
-      'ColorE=800000'
-      'ColorF=800080'
-      'ColorG=808000'
-      'ColorH=808080'
-      'ColorI=C0C0C0'
-      'ColorJ=0000FF'
-      'ColorK=00FF00'
-      'ColorL=00FFFF'
-      'ColorM=FF0000'
-      'ColorN=FF00FF'
-      'ColorO=FFFF00'
-      'ColorP=FFFFFF'
-      'ColorQ=C0DCC0'
-      'ColorR=F0CAA6'
-      'ColorS=F0FBFF'
-      'ColorT=A4A0A0'
-    )
-    left = 304
-    top = 16
   end
 end
