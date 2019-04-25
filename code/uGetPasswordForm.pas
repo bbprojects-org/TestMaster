@@ -59,7 +59,7 @@ end;
 
 procedure TGetPasswordDlg.btnOkClick(Sender: TObject);
 begin
-  if (Scramble(uppercase(EditPassword.Text)) <> AppPassword) then
+  if (Encrypt(uppercase(EditPassword.Text)) <> AppPassword) then
     begin
       MessageWarning('Get Password', 'Password incorrect');
       EditPassword.Setfocus;

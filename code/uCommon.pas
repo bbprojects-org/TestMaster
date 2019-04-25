@@ -65,8 +65,9 @@ var
   procedure MessageWarning(aCaption, aText: string);
   procedure MessageInfo(aText: string);
   procedure RunHelp(HelpFile: string);
-  function  Scramble(WordToScramble: string): string;
-  function  UnScramble(WordToUnScramble: string): string;
+  function  Encrypt(InputString: string): string;
+  function  Decrypt(InputString: string): string;
+  procedure RefreshKeys;
   procedure SwapButtons({%H-}aButt1, {%H-}aButt2: TButton);
   function  LoadImage(var Image: TImage; Filename: string): Boolean;
   procedure FitImage(aImage:  TImage; Resize: boolean = False);   
@@ -195,51 +196,40 @@ end;
 
 { ENCRYPT / DECRYPT STRINGS }
 
+{ These functions are just used to protect the Administrator password }
+
 var
   Key64: TKey64;
 
-function Scramble(WordToScramble: string): string;
+function Encrypt(InputString: string): string;
 var
-  Index: integer;
   PlainText, CipherText: UTF8String;
 begin
-  for Index := 1 to length(WordToScramble) do
-    WordToScramble[Index] := chr( ord(WordToScramble[Index]) + Index);
-  Result := WordToScramble;
-(*
   RefreshKeys;
-  PlainText := StringToUTF8(WordToScramble);
+  PlainText := StringToUTF8(InputString);
   CipherText := DESEncryptStringEx(PlainText, Key64, True);
   Result := UTF8ToString(CipherText);
-*)
 end;
 
 
-function UnScramble(WordToUnScramble: string): string;
+function Decrypt(InputString: string): string;
 var
-  Index: integer;          
   PlainText, CipherText : UTF8String;
 begin
-  for Index := 1 to length(WordToUnScramble) do
-    WordToUnScramble[Index] := chr( ord(WordToUnScramble[Index]) - Index);
-  Result := WordToUnScramble;
-(*
   RefreshKeys;
-  CipherText := StringToUTF8(WordToUnScramble);
+  CipherText := StringToUTF8(InputString);
   PlainText := DESEncryptStringEx(CipherText, Key64, False);
   Result := UTF8ToString(PlainText);
-*)
 end;
 
-(*
+
 procedure RefreshKeys;
 var
   Passphrase: UTF8String;
 begin
-  Passphrase := StringToUTF8('MyPassword');
+  Passphrase := StringToUTF8('9zWc@W=%$G7bSzyYSEY[ZJxs7kF~tb+L-');
   GenerateLMDKey(Key64, SizeOf(Key64), Passphrase);
 end;
-*)
 
 
 { SWAP BUTTONS - assumes button order set ok for MacOS, this will reverse them

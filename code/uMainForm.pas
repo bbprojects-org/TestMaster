@@ -29,14 +29,11 @@
 
 { TODO : Compile, test and amend, on Windows X64. Check button orders OK }
 
-{ TODO : Encrypt password and strings properly with DES rather than Scramble }
-{ TODO : Allow exhibit manager to look for files anywhere }          
+{ TODO : Update exhibit manager to look for files anywhere }
 { TODO : If change/delete Exhibit, delete redundant image file on save }
-{ TODO : Make a TestMaster icon file }
 
 { TODO : BUG : FontSize/Hints not working in RunTestForm. Works ok in AddEditForm? }
 { TODO : BUG : How keep selected item in view in scrollbar (e.g. Goto listbox ) }
-{ TODO : BUG : Changing exhibit - when drop on cannot find it sometimes }
 
 unit uMainForm;
 
@@ -597,7 +594,7 @@ begin
   AdminOptions.IsClearResultsEnabled := False;
   Font.Size := 10;
   AdminOptions.PanelColor := clDefault;
-  AppPassword := Scramble(DEFAULT_ADMIN_PW);
+  AppPassword := Encrypt(DEFAULT_ADMIN_PW);
   AdminOptions.IsRunningScoreEnabled := False;
   menuElapsedTime.Checked := True;
   menuTimeRemaining.Checked := not menuElapsedTime.Checked;

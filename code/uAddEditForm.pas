@@ -128,8 +128,7 @@ type
     EditState: TState;
     UpdatingFlag: Boolean;  // Allows question display without MemoChange activating
     TempQ: TQuestion;
-    localAnswer: Byte;    // Each better represents answer option 0-7
-    ImageLoaded: string;
+    localAnswer: Byte;      // Each bit represents answer option 0-7
     procedure ShowTotalQ;
   public
     localExhibit: string;
@@ -167,7 +166,6 @@ begin
   Height := AppCfg.ReadInteger(SECT_CFG, CFG_WDW_HEIGHT, 0);
   //
   SearchForm := TSearchForm.Create(self);
-  ImageLoaded := '';
 end;
 
 
@@ -316,15 +314,11 @@ var
   ImageFound: boolean;
 begin
   ThisFilename := AppTempDirectory + localExhibit;
-  //ImageFound := False;
-  //if (ThisFilename <> ImageLoaded) then // Image not loaded already?
-    ImageFound := LoadImage(imgExhibit, ThisFilename);
+  ImageFound := LoadImage(imgExhibit, ThisFilename);
 
   if (ImageFound) then
     begin
-      //ImageLoaded := ThisFilename;
-      FitImage(imgExhibit);          
-      //panelExhibit.Color := clWhite;
+      FitImage(imgExhibit);
       panelExhibit.Caption := '';
     end
   else

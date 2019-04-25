@@ -7,6 +7,7 @@
       <MainUnit Value="0"/>
       <Title Value="TestMaster"/>
       <ResourceType Value="res"/>
+      <Icon Value="0"/>
     </General>
     <MacroValues Count="1">
       <Macro1 Name="LCLWidgetType" Value="cocoa"/>

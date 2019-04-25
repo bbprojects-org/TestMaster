@@ -82,7 +82,7 @@ begin
   if (edNewPassword.Text = edConfirmPassword.Text) then
     begin
       // Do not allow blank password
-      AppPassword := Scramble(UpperCase(edNewPassword.Text));
+      AppPassword := Encrypt(UpperCase(edNewPassword.Text));
       MessageInfo('Password changed');
       ModalResult := mrOk;
     end
