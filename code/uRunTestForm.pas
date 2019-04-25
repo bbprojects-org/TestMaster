@@ -50,6 +50,7 @@ type
   { TRunTestForm }
 
   TRunTestForm = class(TForm)
+    panelLeft: TPanel;
     panelExhibit: TPanel;
     TestTimer: TTimer;
     panelButtons: TPanel;
@@ -220,7 +221,9 @@ var
   i: integer;
 begin
   LogoImage.Picture := fMainFormLogoRef.Picture;
-  FitImage(LogoImage);
+  panelTop.Height := Min(120, LogoImage.Picture.Height); // Max logo height = 120
+  FormResize(nil);                                       // Force resize adjustments
+  //
   btnAnswer.Visible := AdminOptions.IsAnswersEnabled;  
   ScrollBox1.Color := AdminOptions.PanelColor;
   // 
@@ -987,6 +990,13 @@ end;
 
 procedure TRunTestForm.FormResize(Sender: TObject);
 begin
+  { LogoImage is set to align right, with panelLeft set to align Client.
+    Want to adjust LogoImage width according to width of window, but need
+    to ensure room for Question # and possible (Marked) flag to left (min 320).
+    If the space to the right exceeds the logo image width itself though, want
+    to restrict it to that width so that Mark/Goto buttons stick to LHS of logo
+  }
+  LogoImage.Width := Min(LogoImage.Picture.Width, panelTop.Width - 320);
   ShowQuestion;                         // Redraw question info
 end;
 

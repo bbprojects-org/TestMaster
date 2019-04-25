@@ -33,7 +33,8 @@
 { TODO : If change/delete Exhibit, delete redundant image file on save }
 
 { TODO : BUG : FontSize/Hints not working in RunTestForm. Works ok in AddEditForm? }
-{ TODO : BUG : How keep selected item in view in scrollbar (e.g. Goto listbox ) }
+{ TODO : BUG : How keep selected item in view in scrollbar (e.g. Goto listbox ) }     
+{ TODO : BUG : Saved results are sometimes wrong, review issue? }
 
 unit uMainForm;
 
