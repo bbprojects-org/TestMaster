@@ -4,6 +4,8 @@ In 1998 whilst undertaking my training for Microsoft Certified Systems Engineer 
 
 Many people have used it over the years and I had reason recently to resurrect it, although now I am Mac based and use Lazarus/FPC in lieu of Delphi, so it got ported and some rework too.
 
+![](resources/Help/run.png)
+
 TestMaster provides the following features:
 
 - Central control of all question sets with summary information for each
