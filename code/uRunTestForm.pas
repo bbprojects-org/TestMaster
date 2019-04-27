@@ -2,6 +2,11 @@
 
   RUN TEST FORM
 
+  This form executes the selected test, maintaining a running total of the
+  correct answers. If enabled users can preview the correct answers, mark
+  the current question to come back to later and offers a sidebar to jump
+  easily between questions
+
     Interface:
     - QSetRef
     - MainFormLogoRef
@@ -837,8 +842,7 @@ begin
   if (not fIsElapsedTime) then
     TestTime := (AppTimer * 60) - TestTime;
   ResultsForm.Add(FormatDateTime('dd mmm yyyy', Date) + '  Test: ' + fFilename);
-  ResultsForm.Add('             Time: ' + ShowTime(TestTime));
-  ResultsForm.Add('             ' + lblResults.Caption);
+  ResultsForm.Add('     Time: ' + ShowTime(TestTime) + ',  ' + lblResults.Caption);
   ResultsForm.Add('');
 end;
 
@@ -861,17 +865,19 @@ var
   UserAnswer: Byte;
   i: integer;
 begin
+  if (ReviewFlag) then Exit;            // No need to check if reviewing
+
   UserAnswer := 0;
   if (fQSetRef.CurrentQuestion.QuestionType = 0) then
     begin
-      for i := 0 to ComponentCount - 1 do
+      for i := 0 to (ComponentCount - 1) do
         if (Components[i] is TRadioButton) then
           if (TRadioButton(Components[i]).Checked) then
             UserAnswer := UserAnswer + TRadioButton(Components[i]).Tag;
     end
   else
     begin
-      for i := 0 to ComponentCount - 1 do
+      for i := 0 to (ComponentCount - 1) do
         if (Components[i] is TCheckBox) then
           if (TCheckBox(Components[i]).Checked) then
             UserAnswer := UserAnswer + TCheckBox(Components[i]).Tag;
@@ -909,12 +915,12 @@ begin
 
   // Only do following if end of test
   if (CheckReview) then
-    begin                   
-      lblResults.Visible := True;       // Always display results at end
-      if (ErrorsFlag) then              // If errors made ...
+    begin
+      lblResults.Visible := True;        // Always display results at end
+      if (ErrorsFlag) then               // If errors made ...
         begin
-          btnEndReview.Enabled := True; // enable review button
-          ReorderErrors;                // only show wrong answers
+          btnEndReview.Enabled := True;  // enable review button
+          ReorderErrors;                 // only show wrong answers
         end
       else
         btnEndReview.Enabled := False;
